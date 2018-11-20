@@ -1,3 +1,5 @@
+import map.World;
+
 import java.io.File;
 
 public class Main {

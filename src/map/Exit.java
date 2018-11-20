@@ -1,3 +1,5 @@
+package map;
+
 public class Exit {
     Place place1;
     Place place2;

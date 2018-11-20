@@ -1,3 +1,8 @@
+package map;
+
+import map.Exit;
+import map.Floor;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +45,7 @@ public class World {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("-");
-                if (parts[0] == "Place")
+                if (parts[0] == "map.Place")
                     System.out.println("gagné");
                 else
                     System.out.println(parts[0]);
