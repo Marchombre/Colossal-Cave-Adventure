@@ -1,7 +1,5 @@
 package map;
 
-import map.Exit;
-
 import java.util.ArrayList;
 import java.util.List;
 
