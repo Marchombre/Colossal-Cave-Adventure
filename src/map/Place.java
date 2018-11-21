@@ -19,7 +19,7 @@ public class Place {
 
     @Override
     public String toString(){
-        return("map.Place's name is " + this.name + " and it's on floor n°" + this.floor);
+        return("Place's name is " + this.name + " and it's on floor n°" + this.floor);
     }
 
     public void addExit(Exit e){

@@ -3,107 +3,65 @@ package map;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-//je pense qu'il faut créer le monde en dernier -> c'est lui qui créé TOUT !
 public class World {
 
-    private List<Floor> floors;
+    private List<Floor> floors = new ArrayList<>();
     private int nbFloors;
-    private final int NBFLOORS = 4;
 
     public World(File file){
 
         List<List<Place>> placesByFloor = new ArrayList<>();
 
-        //on prérempli la liste avec un nombre de liste vide qui correspond au nombre d'étages
-        for(int i = 0; i < NBFLOORS; ++i){
-            List<Place> p = new ArrayList<>();
-            placesByFloor.add(p);
-        }
-
-        //test mais doit etre fait comme ça
-        int NBFLOOR = 2;
-
-        //todo create les places
-        (placesByFloor.get(NBFLOOR)).add(new Place(000, "Cuisine",NBFLOOR));
-
-
-        //todo quand c fini on doit créer les etages donc on fera comme ça
-        int index = 0;
-        for(List<Place> pbf : placesByFloor){
-            new Floor(index, pbf);
-            ++index;
-        }
-
-
-        BufferedReader br;
+        Scanner scanner = null;
         try {
-            br = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("-");
-                if (parts[0] == "map.Place")
-                    System.out.println("gagné");
-                else
-                    System.out.println(parts[0]);
+            scanner = new Scanner (new BufferedReader (new FileReader (file)));
+
+            while (scanner.hasNextLine()) {
+                String[] lineSplit = scanner.nextLine().split(" : ");
+                switch (lineSplit[0]) {
+                    case "NBFLOORS":
+                        this.nbFloors = Integer.parseInt(lineSplit[1]);
+                        for(int i = 0; i < nbFloors; ++i){
+                            List<Place> p = new ArrayList<>();
+                            placesByFloor.add(p);
+                        }
+                        break;
+                    case "Place":
+                        String[] splitPlace = lineSplit[1].split(",");
+                        placesByFloor.get(Integer.parseInt(splitPlace[2])).add(new Place(Integer.parseInt(splitPlace[0]),splitPlace[1],Integer.parseInt(splitPlace[2])));
+                        break;
+
+                    case "Exit":
+                        String[] splitExit = lineSplit[1].split(",");
+                        int place1 = Integer.parseInt(splitExit[0]);
+                        int place2 = Integer.parseInt(splitExit[1]);
+                        new Exit(placesByFloor.get(place1/100).get(place1-((place1/100)*100)),placesByFloor.get(place2/100).get(place2-((place2/100)*100)));
+                        break;
+                }
             }
-            br.close();
+            //creation of all FLoors
+            for(int i = 0; i <placesByFloor.size(); ++i){
+                new Floor(i,placesByFloor.get(i));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } finally {
+            scanner.close(); //in any case we close the Scanner
         }
-
-
-
-
-
-
-
-
-        /*FileChannel fc;
-
-        //pour pouvoir lire dans un fichier on utilise un buffer pour accélérer la lecture et optimiser le programme
-        try(FileInputStream fis = new FileInputStream(file)) {
-
-            //On récupère le canal
-            fc = fis.getChannel();
-            //On en déduit la taille
-            int size = (int)fc.size();
-            //On crée un buffer correspondant à la taille du fichier
-            ByteBuffer bBuff = ByteBuffer.allocate(size);
-
-            //Démarrage de la lecture
-            fc.read(bBuff);
-            //On prépare à la lecture avec l'appel à flip
-            bBuff.flip();
-
-            //Puisque nous avons utilisé un buffer de byte afin de récupérer les données
-            //Nous pouvons utiliser un tableau de byte
-            //La méthode array retourne un tableau de byte
-            byte[] tabByte = bBuff.array();
-
-            for (byte bit : tabByte) {
-                System.out.print((char) (bit & 0xFF)); // le "& 0xFF" permet de gérer correctement les caractères accentués !
-            }
-            System.out.println("");
-
-        } catch (FileNotFoundException e) {
-            // Cette exception est levée si l'objet FileInputStream ne trouve aucun fichier
-            e.printStackTrace();
-        } catch (IOException e) {
-            // Celle-ci se produit lors d'une erreur d'écriture ou de lecture
-            e.printStackTrace();
-        }*/
     }
 
     public World(){
+
         List<Place> placeF0 = new ArrayList<>();
         Place p000 = new Place(000, "place1",0); placeF0.add(p000);
         Place p001 = new Place(002, "place3",0); placeF0.add(p001);
         Place p002 = new Place(001, "place2",0); placeF0.add(p002);
 
         Floor f0 = new Floor(0, placeF0);
+
+        floors.add(f0);
 
         List<Place> placeF1 = new ArrayList<>();
         Place p100 = new Place(100, "place1",1); placeF1.add(p100);
