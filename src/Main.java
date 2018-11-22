@@ -14,7 +14,7 @@ public class Main {
         File file = new File(FILENAME);
         World w = new World(file);
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(Syste m.in);
         System.out.println("Veuillez choisir un nom pour votre personnage");
         String persoName = sc.nextLine();
         System.out.println("votre perso s'appelle " + persoName);
