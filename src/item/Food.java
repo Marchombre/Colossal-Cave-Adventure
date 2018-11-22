@@ -1,4 +1,4 @@
-package game;
+package item;
 
 public abstract class Food extends Item {
 	
@@ -6,6 +6,10 @@ public abstract class Food extends Item {
 
 	public Food() {
 		super();
+	}
+	
+	public int getRegen() {
+		return this.regen;
 	}
 
 	

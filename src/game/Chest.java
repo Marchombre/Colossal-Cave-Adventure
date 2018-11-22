@@ -1,5 +1,7 @@
 package game;
 
+import item.Item;
+
 public class Chest {
 	
 	private boolean open;
