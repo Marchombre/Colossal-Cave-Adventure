@@ -1,6 +1,4 @@
-package game;
-
-import item.Item;
+package item;
 
 public class DoorKey extends Item{
 }

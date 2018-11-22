@@ -1,6 +1,6 @@
 package map;
 
-import game.DoorKey;
+import item.DoorKey;
 
 public class LockedExit extends Exit {
 
