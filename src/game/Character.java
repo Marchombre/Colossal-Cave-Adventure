@@ -2,6 +2,9 @@ package game;
 
 import java.util.ArrayList;
 
+import item.Food;
+import item.Item;
+
 public abstract class Character {
 	
 	private String name;
@@ -25,7 +28,7 @@ public abstract class Character {
 	
 	public void eat(Item i) {
 		if(i instanceof Food) {
-			this.life = ((Food) i).regen + this.life;
+			this.life = ((Food) i).getRegen() + this.life;
 		}
 	}
 	

@@ -2,6 +2,8 @@ package game;
 
 import java.util.ArrayList;
 
+import item.Item;
+
 public class GoldenChest {
 	
 	private boolean open;
