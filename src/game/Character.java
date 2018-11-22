@@ -12,12 +12,6 @@ public abstract class Character {
 	
 	private ArrayList<Item> items;
 	
-	public Character(String name, int life) {
-		this.name = name;
-		this.life = life;
-		this.items = new ArrayList<>();
-	}
-	
 	public void addItem(Item i) {
 		this.items.add(i);
 	}
