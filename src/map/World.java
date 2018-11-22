@@ -31,7 +31,6 @@ public class World {
                     case "Place":
                         String[] splitPlace = lineSplit[1].split(",");
                         int nFloor = Integer.parseInt(splitPlace[0])/100;
-                        System.out.println(nFloor);
                         placesByFloor.get(nFloor).add(new Place(Integer.parseInt(splitPlace[0]),splitPlace[1]));
                         break;
 
