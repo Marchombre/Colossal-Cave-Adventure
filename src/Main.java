@@ -1,7 +1,6 @@
 import map.World;
 
 import java.io.File;
-import java.util.Scanner;
 
 public class Main {
 
@@ -12,12 +11,7 @@ public class Main {
 
         //Le fichier .txt doit être placé a la racine du projet
         File file = new File(FILENAME);
-        World w = new World(file);
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez choisir un nom pour votre personnage");
-        String persoName = sc.nextLine();
-        System.out.println("votre perso s'appelle " + persoName);
+        new World(file);
     }
 
     /*
