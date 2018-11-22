@@ -30,7 +30,9 @@ public class World {
                         break;
                     case "Place":
                         String[] splitPlace = lineSplit[1].split(",");
-                        placesByFloor.get(Integer.parseInt(splitPlace[2])).add(new Place(Integer.parseInt(splitPlace[0]),splitPlace[1],Integer.parseInt(splitPlace[2])));
+                        int nFloor = Integer.parseInt(splitPlace[0])/100;
+                        System.out.println(nFloor);
+                        placesByFloor.get(nFloor).add(new Place(Integer.parseInt(splitPlace[0]),splitPlace[1]));
                         break;
 
                     case "Exit":
@@ -52,7 +54,7 @@ public class World {
         }
     }
 
-    public World(){
+    /*public World(){
 
         List<Place> placeF0 = new ArrayList<>();
         Place p000 = new Place(000, "place1",0); placeF0.add(p000);
@@ -177,5 +179,5 @@ public class World {
         new Exit(p408,p500);
 
         p309.getExits();
-    }
+    }*/
 }

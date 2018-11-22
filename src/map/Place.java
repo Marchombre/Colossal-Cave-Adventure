@@ -7,19 +7,17 @@ public class Place {
 
     private String name;
     private int id;
-    private int floor;
     private List<Exit> exits;
 
-    public Place(int id, String name, int floor){
+    public Place(int id, String name){
         this.id = id;
         this.name = name;
-        this.floor = floor;
         this.exits = new ArrayList<>();
     }
 
     @Override
     public String toString(){
-        return("Place's name is " + this.name + " and it's on floor n°" + this.floor);
+        return("Place's name is " + this.name + " and it's on floor n°" + getFloor());
     }
 
     public void addExit(Exit e){
@@ -38,6 +36,6 @@ public class Place {
     }
 
     public int getFloor(){
-        return this.floor;
+        return (this.id/100)*100;
     }
 }
