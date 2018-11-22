@@ -1,8 +1,8 @@
 package map;
 
 public class Exit {
-    Place place1;
-    Place place2;
+    protected Place place1;
+    protected Place place2;
 
     public Exit(Place p1, Place p2){
         place1 = p1;
