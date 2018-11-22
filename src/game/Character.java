@@ -1,10 +1,5 @@
 package game;
 
-import java.util.ArrayList;
-
-import item.Food;
-import item.Item;
-
 public abstract class Character {
 
 	protected int life;
