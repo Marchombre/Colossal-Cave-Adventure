@@ -44,7 +44,7 @@ public class World {
                         break;
                 }
             }
-            //creation of all FLoors
+            //creation of all Floors
             for(int i = 0; i <placesByFloor.size(); ++i){
                 new Floor(i,placesByFloor.get(i));
             }
