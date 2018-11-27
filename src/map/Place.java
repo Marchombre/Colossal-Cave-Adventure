@@ -17,25 +17,32 @@ public class Place {
 
     @Override
     public String toString(){
-        return("Place's name is " + this.name + " and it's on floor n°" + getFloor());
+        return("Place's name is " + this.name + " and it's on floor n" + getFloor());
     }
 
     public void addExit(Exit e){
         exits.add(e);
     }
 
-    public int getId(){
-        return id;
+    public Exit getExit(int num){
+        Exit tmp = null;
+        for(int i = 0; i < exits.size(); ++i) {
+            if(num == i+1)
+                tmp = exits.get(i);
+        }
+        return tmp;
     }
 
     public void getExits(){
         String res = "";
-        for(Exit e : exits)
-            res += e.toString() + " ; ";
+        for(int i = 0; i < exits.size(); ++i) {
+            int val = i+1;
+            res += "Door number " + val + " ";
+        }
         System.out.println(res);
     }
 
     public int getFloor(){
-        return (this.id/100)*100;
+        return (this.id/100);
     }
 }

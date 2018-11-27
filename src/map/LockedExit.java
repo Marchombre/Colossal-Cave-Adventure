@@ -18,11 +18,11 @@ public class LockedExit extends Exit {
             this.locked = false;
     }
 
-    @Override
+/*    @Override
     public void cross(){
         if(locked == false){
             //todo
         }
-    }
+    }*/
 
 }

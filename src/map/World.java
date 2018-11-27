@@ -1,6 +1,8 @@
 package map;
 
 import game.Player;
+import item.Apple;
+import item.Item;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,12 +18,12 @@ public class World {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
 
-        Scanner scanner = null;
+        Scanner scannerFile = null;
         try {
-            scanner = new Scanner (new BufferedReader (new FileReader (file)));
+            scannerFile = new Scanner (new BufferedReader (new FileReader (file)));
 
-            while (scanner.hasNextLine()) {
-                String[] lineSplit = scanner.nextLine().split(" : ");
+            while (scannerFile.hasNextLine()) {
+                String[] lineSplit = scannerFile.nextLine().split(" : ");
                 switch (lineSplit[0]) {
                     case "NBFLOORS":
                         this.nbFloors = Integer.parseInt(lineSplit[1]);
@@ -30,6 +32,7 @@ public class World {
                             placesByFloor.add(p);
                         }
                         break;
+
                     case "Place":
                         String[] splitPlace = lineSplit[1].split(",");
                         int nFloor = Integer.parseInt(splitPlace[0])/100;
@@ -46,19 +49,38 @@ public class World {
             }
             //creation of all Floors
             for(int i = 0; i <placesByFloor.size(); ++i){
-                new Floor(i,placesByFloor.get(i));
+                floors.add(new Floor(i,placesByFloor.get(i)));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
-            scanner.close(); //in any case we close the Scanner
+            scannerFile.close(); //in any case we close the Scanner
         }
 
-
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Veuillez choisir un nom pour votre personnage");
-        String persoName = sc.nextLine();
+        String persoName = scanner.nextLine();
+        System.out.println("votre perso s'nomme " + persoName);
         Player hero = new Player(persoName, getPlaceById(000));
+        Item i = new Apple();
+        hero.addItem(i);
+        while(true){
+            String[] command = scanner.nextLine().split(" ");
+            if(command[0].equals("STOP") || command[0].equals("QUIT")){
+                System.out.println("fin du jeu");
+                break;
+            }else if(command[0].equals("LOC")){
+                System.out.println(hero.getPlace());
+                hero.getPlace().getExits();
+            }else if(command[0].equals("GO")){
+                Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
+                if(e != null)
+                    hero.move(e);
+            }else if(command[0].equals("INFO")) {
+                hero.displayItem();
+            }
+        }
+
     }
 
     public Place getPlaceById(int id){

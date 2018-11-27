@@ -12,12 +12,10 @@ public class Exit {
         p2.addExit(this);
     }
 
-    public void cross(){
-        //todo récuperer la salle dans laquelle on est et si possible aller dans l'autre salle liée a la porte
-    }
-
-    @Override
-    public String toString() {
-        return (place1.getId() + "-" + place2.getId());
+    public Place cross(Place current){
+        if(current == place1)
+            return place2;
+        else
+            return place1;
     }
 }

@@ -13,15 +13,4 @@ public class Main {
         File file = new File(FILENAME);
         new World(file);
     }
-
-    /*
-    a partir de l'entré standard
-    Scanner sc1 = new Scanner(System.in);
-
-    a partir d'un chaine
-    Scanner sc2 = new Scanner("coucou");
-
-    a partir d'un fichier
-    Scanner sc3 = new Scanner(new file("toto.txt"));
-     */
 }

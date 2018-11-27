@@ -1,6 +1,7 @@
 package game;
 
 import item.*;
+import map.Exit;
 import map.Place;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
+		items = new ArrayList<>();
 	}
 
 	public void addItem(Item i) {
@@ -36,4 +38,18 @@ public class Player extends Character {
 		return this.life;
 	}
 
+	public Place getPlace(){
+		return currentPlace;
+	}
+
+	public void displayItem() {
+		System.out.print("Inventaire : ");
+		for(Item i : items) {
+			System.out.print(i.getName() + " ");
+		}
+	}
+
+	public void move(Exit e){
+		currentPlace = e.cross(currentPlace);
+	}
 }
