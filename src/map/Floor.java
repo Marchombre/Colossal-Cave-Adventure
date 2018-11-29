@@ -15,4 +15,8 @@ public class Floor {
     public void addPlace(Place p){
         places.add(p);
     }
+
+    public Place getPlace(int nPlace){
+        return places.get(nPlace);
+    }
 }
