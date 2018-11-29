@@ -93,6 +93,7 @@ public class World {
                 break;
             }else if(command[0].equals("LOOK")){
                 hero.getPlace().afficherSalle();
+                
             }else if(command[0].equals("GO")){
                 Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
                 if(e != null)
