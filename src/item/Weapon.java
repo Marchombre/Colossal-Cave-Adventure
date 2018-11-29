@@ -7,5 +7,9 @@ public abstract class Weapon extends Item {
 	public Weapon() {
 		super();
 	}
+
+	public int getHit() {
+		return this.hit;
+	}
 	
 }

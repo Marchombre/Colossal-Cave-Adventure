@@ -7,7 +7,9 @@ public abstract class Monster extends Character {
 	public Monster() {
 		
 	}
-	
-	
+
+	public String getName(){
+		return this.name;
+	}
 
 }

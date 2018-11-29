@@ -1,5 +1,10 @@
 package map;
 
+import game.Chest;
+import game.GoldenChest;
+import game.Monster;
+import item.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +13,8 @@ public class Place {
     private String name;
     private int id;
     private List<Exit> exits;
+    private Chest chest;
+    private Monster monster;
 
     public Place(int id, String name){
         this.id = id;
@@ -17,7 +24,7 @@ public class Place {
 
     @Override
     public String toString(){
-        return("Place's name is " + this.name + " and it's on floor n" + getFloor());
+        return("Vous êtes dans la salle n°" + this.id + " à l'étage " + getFloor());
     }
 
     public void addExit(Exit e){
@@ -33,16 +40,57 @@ public class Place {
         return tmp;
     }
 
-    public void getExits(){
+    public void afficherExits(){
         String res = "";
         for(int i = 0; i < exits.size(); ++i) {
             int val = i+1;
-            res += "Door number " + val + " ";
+            res += "Porte n°" + val + " ";
         }
         System.out.println(res);
     }
 
     public int getFloor(){
         return (this.id/100);
+    }
+
+
+    public void addChest(Chest c) {
+        this.chest = c;
+    }
+    public void getChests() {
+        System.out.println("");
+    }
+
+    public Chest getChest() {
+        return this.chest;
+    }
+
+    public void addMonster(Monster m) {
+        this.monster = m;
+    }
+    public Monster getMonster() {
+        return this.monster;
+    }
+
+    public void afficherMonsters() {
+        if(this.monster != null) {
+            System.out.println("Monste : "+this.monster.getName());
+        }
+    }
+
+    public void afficherChest(Chest c) {
+        if(c instanceof GoldenChest) {
+            System.out.println("Il y a 1 coffre d'oré");
+        }
+        else {
+            System.out.println("Il y a 1 Coffre");
+        }
+    }
+
+    public void afficherSalle() {
+        System.out.println(toString());
+        afficherExits();
+        afficherMonsters();
+        afficherChest(this.chest);
     }
 }

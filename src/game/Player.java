@@ -12,6 +12,7 @@ public class Player extends Character {
     private String name;
     private ArrayList<Item> items;
     private Place currentPlace;
+    private Weapon weapon;
 
 	public Player(String heroName, Place place) {
 		this.name = heroName;
@@ -51,5 +52,23 @@ public class Player extends Character {
 
 	public void move(Exit e){
 		currentPlace = e.cross(currentPlace);
+	}
+
+	public Weapon getWeapon() {
+		return this.weapon;
+	}
+
+	public void equip(String s) {
+		for(Item k : items) {
+			if(k.getName().equals(s) && k instanceof Weapon) {
+				this.weapon = (Weapon)k;
+				System.out.println("Equiper de : "+k.getName());
+				break;
+			}
+			else if(k.getName().equals(s)) {
+				System.out.println("IMPOSSIBLE DE SEQUIPER DE "+k.getName()+" PAS ARMES");
+				break;
+			}
+		}
 	}
 }

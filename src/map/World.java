@@ -1,8 +1,8 @@
 package map;
 
-import game.Player;
-import item.Apple;
-import item.Item;
+import com.sun.corba.se.impl.ior.IORTemplateImpl;
+import game.*;
+import item.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -63,21 +63,54 @@ public class World {
         System.out.println("votre perso s'nomme " + persoName);
         Player hero = new Player(persoName, getPlaceById(000));
         Item i = new Apple();
+
+        // METHODE POUR TAKE
+        Item i2 = new Apple();
+        Sword s2 = new Sword();
+        BigMac bg = new BigMac();
+        Chest c = new Chest();
+        GoldenChest c2 = new GoldenChest();
+        c2.addItem(i2);
+        c2.addItem(s2);
+        c2.addItem(bg);
+        hero.getPlace().addChest(c);
+
+        // METHODE POUR FIGHT
+        Monster monster = new Demogorgon();
+        hero.getPlace().addMonster(monster);
+
+        //METHODE POUR INVENTAIRE
         hero.addItem(i);
+
+        //METHODE POUR EQUIP
+        Weapon w2 = (Weapon)new Sword();
+        hero.addItem(w2);
+
         while(true){
             String[] command = scanner.nextLine().split(" ");
             if(command[0].equals("STOP") || command[0].equals("QUIT")){
                 System.out.println("fin du jeu");
                 break;
-            }else if(command[0].equals("LOC")){
-                System.out.println(hero.getPlace());
-                hero.getPlace().getExits();
+            }else if(command[0].equals("LOOK")){
+                hero.getPlace().afficherSalle();
             }else if(command[0].equals("GO")){
                 Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
                 if(e != null)
                     hero.move(e);
             }else if(command[0].equals("INFO")) {
                 hero.displayItem();
+            }else if(command[0].equals("TAKE")) {
+                hero.addItem(hero.getPlace().getChest().getItems());
+            }else if(command[0].equals("EQUIP")) {
+                String s = command[1];
+                hero.equip(s);
+            }else if(command[0].equals("FIGHT")) {
+                System.out.println(hero.getPlace().getMonster().getLife());
+                hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
+                System.out.println(hero.getPlace().getMonster().getLife());
+            }
+            else if(command[0].equals("OPEN")) {
+                hero.getPlace().getChest().open();
             }
         }
 
