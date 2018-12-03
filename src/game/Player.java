@@ -21,6 +21,10 @@ public class Player extends Character {
 		items = new ArrayList<>();
 	}
 
+	public String getName(){
+	    return name;
+    }
+
 	public void addItem(Item i) {
 		this.items.add(i);
 	}

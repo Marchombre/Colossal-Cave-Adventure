@@ -1,22 +1,38 @@
 import Exceptions.NoDirectoryOfThisNameException;
 import Exceptions.NoTxtFileInDirectoryException;
 
-import game.*;
 import map.World;
 
 import java.io.File;
 import java.util.Scanner;
 
 public class Main {
-    //initiate / create world
 
     private static Scanner scanner = new Scanner(System.in);
+    private static World world;
 
     public static void main(String[] args) {
+        String filename;
         System.out.println("Bienvenue dans COLOSSAL CAVE ADVENTURE !!");
         System.out.println("Voulez vous charger une partie sauvegardée ? (y/n)");
         String resp = scanner.nextLine().toLowerCase();
-        initiate(resp);
+        filename = initiate(resp);
+        File file = new File(filename);
+        world = new World(file);
+
+        if(world.getHero() == null){
+            System.out.println("Veuillez choisir un nom pour votre personnage");
+            String persoName = scanner.nextLine();
+            System.out.println("Bonne chance dans votre aventure " + persoName);
+            world.setHero(persoName);
+        }
+        else
+            System.out.println("Bon retour " + world.getHero().getName());
+
+        while(true){//TODO changer la condition d'arret du while
+            String command = scanner.nextLine();
+            world.action(command);
+        }
     }
 
     private static String[] listOfFiles(File rep) throws NoDirectoryOfThisNameException, NoTxtFileInDirectoryException {
@@ -31,6 +47,7 @@ public class Main {
 
     private static String choiceOfWorld(String directory) throws NoDirectoryOfThisNameException, NoTxtFileInDirectoryException {
         String[] listOfFile;
+        String filename;
         try {
             listOfFile = listOfFiles(new File(directory));
             for (int i = 0; i < listOfFile.length; i++) {
@@ -38,18 +55,17 @@ public class Main {
                     System.out.println(i + 1 + " : " + listOfFile[i].substring(0, listOfFile[i].length() - 4));
             }
             System.out.println("Vous pouvez choisir en entrant le chiffre correspondant au fichier");
-            String FILENAME;
             try {
                 int numOfFile = Integer.parseInt(scanner.nextLine());
-                FILENAME = "worlds/" + listOfFile[numOfFile - 1];
+                filename = "worlds/" + listOfFile[numOfFile - 1];
             } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrer un chiffre");
-                FILENAME = choiceOfWorld(directory);
+                filename = choiceOfWorld(directory);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Veuillez entrer un chiffre correspondant a l'un de ceux affichés");
-                FILENAME = choiceOfWorld(directory);
+                filename = choiceOfWorld(directory);
             }
-            return FILENAME;
+            return filename;
         } catch (NoDirectoryOfThisNameException e) {
             throw new NoDirectoryOfThisNameException();
         } catch (NoTxtFileInDirectoryException e) {
@@ -57,9 +73,8 @@ public class Main {
         }
     }
 
-    private static void initiate(String resp) {
-        Player hero = null;
-        String FILENAME;
+    private static String initiate(String resp) {
+        String filename = null;
 
         switch (resp) {
             case "y":
@@ -68,7 +83,7 @@ public class Main {
             case "oui":
                 try {
                     System.out.println("Vous avez choisi de jouer sur une partie sauvegardée");
-                    FILENAME = choiceOfWorld("backups"); //TODO check l'extention des fichiers
+                    filename = choiceOfWorld("backups"); //TODO check l'extention des fichiers (pas forcement txt)
                 } catch (NoDirectoryOfThisNameException e) {
                     e.printStackTrace();
                 } catch (NoTxtFileInDirectoryException e) {
@@ -82,13 +97,7 @@ public class Main {
             case "non":
                 try {
                     System.out.println("Vous avez choisi de commencer une nouvelle partie, merci de choisir un monde parmis la liste suivante");
-                    FILENAME = choiceOfWorld("worlds");
-                    File file = new File(FILENAME);
-                    World world = new World(file);
-                    System.out.println("Veuillez choisir un nom pour votre personnage");
-                    String persoName = scanner.nextLine();
-                    System.out.println("votre perso s'nomme " + persoName);
-                    hero = new Player(persoName, world.getPlaceById(000));
+                    filename = choiceOfWorld("worlds");
                 } catch (NoDirectoryOfThisNameException | NoTxtFileInDirectoryException e) {
                     e.printStackTrace();
                 }
@@ -98,8 +107,10 @@ public class Main {
                 System.out.println("Nous n'avons pas compris la réponse, merci de répondre avec y ou n");
                 System.out.println("Voulez vous charger une partie sauvegardée ? (y/n)");
                 resp = scanner.nextLine().toLowerCase();
-                initiate(resp);
+                filename = initiate(resp);
                 break;
         }
+
+        return filename;
     }
 }
