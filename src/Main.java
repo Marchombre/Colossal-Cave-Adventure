@@ -10,7 +10,21 @@ import java.util.Scanner;
 public class Main {
     //initiate / create world
 
+<<<<<<< HEAD
     private static Scanner scanner = new Scanner(System.in);
+=======
+<<<<<<< HEAD
+        String FILENAME = "fileTest.txt";
+=======
+        Scanner scanner = new Scanner(System.in);
+        Player hero = null;
+
+        //afficher un message bienvenue sur le jeu, voulez vous reprendre une partie sauvegardée ?
+        // oui / non
+        //autre réponse -> exception avec message puis redemande de la question
+        //si oui et pas de partie sauvegardée --> exception (si partie qui existe alors propose la liste des parties save et laisse choisir
+        // si non -> proposer quelle map choisir
+>>>>>>> 33fd20d3377dfde671752878f168e1d8e0272285
 
     public static void main(String[] args) {
         System.out.println("Bienvenue dans COLOSSAL CAVE ADVENTURE !!");
@@ -103,7 +117,20 @@ public class Main {
         }
     }
 
+<<<<<<< HEAD
     private static void play(){
+=======
+    public static String[] listOfFiles(File rep) {
+        return rep.list();
+        //todo throw exception if list is empty
+    }
+
+    private Player init(World world) {
+        //todo
+        return null;
+    }
+>>>>>>> 6d98cdcca72d3742bec8d62cb50e0c57df8ba16a
+>>>>>>> 33fd20d3377dfde671752878f168e1d8e0272285
 
     }
 }
