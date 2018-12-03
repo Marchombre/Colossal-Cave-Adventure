@@ -1,6 +1,5 @@
 package map;
 
-import com.sun.corba.se.impl.ior.IORTemplateImpl;
 import game.*;
 import item.*;
 
@@ -63,6 +62,7 @@ public class World {
         System.out.println("votre perso s'nomme " + persoName);
         Player hero = new Player(persoName, getPlaceById(000));
         Item i = new Apple();
+        //TODO TO REMOVE
 
         // METHODE POUR TAKE
         Item i2 = new Apple();
