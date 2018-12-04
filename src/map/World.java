@@ -1,7 +1,7 @@
 package map;
 
 import game.*;
-import item.*;
+import item.Item;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class World {
     private int nbFloors;
     private Player hero = null;
 
-    public World(File file){
+    public World(File file) {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
 
@@ -53,24 +53,22 @@ public class World {
         }
     }
 
-    public Player getHero(){
+    public Player getHero() {
         return this.hero;
     }
 
-    public void setHero(String name){
+    public void setHero(String name) {
         this.hero = new Player(name, getPlaceById(0));
     }
 
-    private Place getPlaceById(int id){
-        return floors.get(id/100).getPlace(id-((id/100)*100));
+    private Place getPlaceById(int id) {
+        return floors.get(id / 100).getPlace(id - ((id / 100) * 100));
     }
 
-    public void action(String com){
-        //split command
+    public void action(String com) {
+        com = com.toLowerCase();
         String[] command = com.split(" ");
 
-//        Item i = new Apple();
-//
 //        // METHODE POUR TAKE
 //        Item i2 = new Apple();
 //        Sword s2 = new Sword();
@@ -93,46 +91,72 @@ public class World {
 //        Weapon w2 = (Weapon)new Sword();
 //        hero.addItem(w2);
 
-        label:
-        while (true) {
-            switch (command[0]) {
-                case "HELP":
-                    System.out.println("todo liste des commandes");
-                    //TODO
-                case "LOOK":
-                    hero.getPlace().afficherSalle();
-                    break;
-                case "GO":
-                    Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
-                    if (e != null)
-                        hero.move(e);
-                    break;
-                case "INFO":
-                    hero.displayItem();
-                    break;
-                case "TAKE":
-                    hero.addItem(hero.getPlace().getChest().getItems());
-                    break;
-                case "EQUIP":
-                    String s = command[1];
-                    hero.equip(s);
-                    break;
-                case "FIGHT":
-                    System.out.println(hero.getPlace().getMonster().getLife());
-                    hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
-                    System.out.println(hero.getPlace().getMonster().getLife());
-                    break;
-                case "OPEN":
-                    hero.getPlace().getChest().open();
-                    break;
-                case "STOP":
-                case "QUIT":
-                    System.out.println("todo end game");
-                    //TODO
-                    break label;
-                default :
-                    System.out.println("Cette commande n'est pas reconnue. Entrez HELP pour connaitre la liste des commandes");
-            }
+        switch (command[0]) {
+            case "help":
+                System.out.println("todo liste des commandes");
+                // TODO: 04/12/2018
+                break;
+            case "look":
+                if (command.length == 1)
+                    hero.getPlace().displayPlace();
+                else if (command.length == 2) {
+                    //todo description de l'objet passé en parametre
+                    System.out.println("TODO");
+                } else
+                    System.out.println("la commande look s'utilise avec zéro ou un argument merci de recommencer");
+                break;
+            case "go":
+                if (command.length == 1)
+                    System.out.println("la commande GO s'utilise avec un argument merci de recommencer");
+                else if (command.length == 2) {
+                    try {
+                        Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
+                        if (e != null)
+                            hero.move(e);
+                        else
+                            System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
+                    }catch (NumberFormatException e){
+                        System.out.println("Le deuxième argument doit être un chiffre");
+                    }
+                } else
+                    System.out.println("la commande GO s'utilise avec un seul argument merci de recommencer");
+                break;
+                /// TODO: 04/12/2018
+//            case "info":
+//                hero.displayItem();
+//                break;
+            case "take":
+                if (command.length == 1)
+                    System.out.println("la commande take s'utilise avec un argument merci de recommencer");
+                else if (command.length == 2) {
+                    Item itemToAdd = hero.getPlace().getItems(command[1]);
+                    if(itemToAdd != null) {
+                        hero.addItem(itemToAdd);
+                        System.out.println("vous avez ramassé : " + command[1]);
+                    } else
+                        System.out.println("veuillez orthographier le nom de l'item correctement");
+                } else
+                    System.out.println("la commande take s'utilise avec un seul argument merci de recommencer");
+                break;
+//            case "equip": // TODO: 04/12/2018
+//                String s = command[1];
+//                hero.equip(s);
+//                break;
+            case "fight":
+                System.out.println(hero.getPlace().getMonster().getLife());
+                hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
+                System.out.println(hero.getPlace().getMonster().getLife());
+                break;
+            case "open":
+                hero.getPlace().getChest().open();
+                break;
+            case "stop":
+            case "quit":
+                System.out.println("todo end game");
+                break;
+            default:
+                System.out.println("Cette commande n'est pas reconnue. Entrez HELP pour connaitre la liste des commandes");
+                break;
         }
     }
 }

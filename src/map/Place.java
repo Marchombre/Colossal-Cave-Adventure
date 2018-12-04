@@ -15,11 +15,13 @@ public class Place {
     private List<Exit> exits;
     private Chest chest;
     private Monster monster;
+    private List<Item> items;
 
     public Place(int id, String name){
         this.id = id;
         this.name = name;
         this.exits = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
     @Override
@@ -40,11 +42,11 @@ public class Place {
         return tmp;
     }
 
-    public void afficherExits(){
-        String res = "";
+    public void displayExits(){
+        StringBuilder res = new StringBuilder();
         for(int i = 0; i < exits.size(); ++i) {
             int val = i+1;
-            res += "Porte n°" + val + " ";
+            res.append("Porte n°").append(val).append(" ");
         }
         System.out.println(res);
     }
@@ -53,10 +55,10 @@ public class Place {
         return (this.id/100);
     }
 
-
     public void addChest(Chest c) {
         this.chest = c;
     }
+
     public void getChests() {
         System.out.println("");
     }
@@ -68,13 +70,14 @@ public class Place {
     public void addMonster(Monster m) {
         this.monster = m;
     }
+
     public Monster getMonster() {
         return this.monster;
     }
 
     public void afficherMonsters() {
         if(this.monster != null) {
-            System.out.println("Monste : "+this.monster.getName());
+            System.out.println("Monstre : "+this.monster.getName());
         }
     }
 
@@ -87,10 +90,32 @@ public class Place {
         }
     }
 
-    public void afficherSalle() {
+    public void displayPlace() {
         System.out.println(toString());
-        afficherExits();
+        displayExits();
+        displayItems();
         afficherMonsters();
         afficherChest(this.chest);
+    }
+
+    public Item getItems(String entry){
+        Item itemToReturn = null;
+        for(int i =0 ; i<items.size(); ++i){
+            if(items.get(i).getName().toLowerCase().equals(entry))
+                itemToReturn = items.remove(i);
+        }
+        return itemToReturn;
+    }
+
+    public void addItem(Item item){
+        items.add(item);
+    }
+
+    public void displayItems(){
+        String res = "";
+        for (Item item : items) {
+            res += item.getName() + " ";
+        }
+        System.out.println("Item : " + res);
     }
 }

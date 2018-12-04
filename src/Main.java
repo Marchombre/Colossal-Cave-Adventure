@@ -1,6 +1,8 @@
 import Exceptions.NoDirectoryOfThisNameException;
 import Exceptions.NoTxtFileInDirectoryException;
 
+import item.Apple;
+import item.Item;
 import map.World;
 
 import java.io.File;
@@ -20,18 +22,18 @@ public class Main {
         File file = new File(filename);
         world = new World(file);
 
-        if(world.getHero() == null){
+        if (world.getHero() == null) {
             System.out.println("Veuillez choisir un nom pour votre personnage");
             String persoName = scanner.nextLine();
             System.out.println("Bonne chance dans votre aventure " + persoName);
             world.setHero(persoName);
-        }
-        else
+        } else
             System.out.println("Bon retour " + world.getHero().getName());
 
-        while(true){//TODO changer la condition d'arret du while
+        while (true) {//TODO changer la condition d'arret du while
             String command = scanner.nextLine();
             world.action(command);
+            System.out.println("------------------------------");
         }
     }
 
