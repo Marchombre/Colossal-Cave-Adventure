@@ -121,7 +121,7 @@ public class World {
                 } else
                     System.out.println("la commande GO s'utilise avec un seul argument merci de recommencer");
                 break;
-                /// TODO: 04/12/2018
+                // TODO: 04/12/2018
 //            case "info":
 //                hero.displayItem();
 //                break;
@@ -138,16 +138,35 @@ public class World {
                 } else
                     System.out.println("la commande take s'utilise avec un seul argument merci de recommencer");
                 break;
+            case "use" :
+                // TODO: 04/12/2018
+                break;
 //            case "equip": // TODO: 04/12/2018
 //                String s = command[1];
 //                hero.equip(s);
 //                break;
-            case "fight":
-                System.out.println(hero.getPlace().getMonster().getLife());
-                hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
-                System.out.println(hero.getPlace().getMonster().getLife());
-                break;
-            case "open":
+//            case "fight": // TODO: 04/12/2018
+//                System.out.println(hero.getPlace().getMonster().getLife());
+//                hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
+//                System.out.println(hero.getPlace().getMonster().getLife());
+//                break;
+            case "open": // TODO: 04/12/2018
+                if (command.length == 3) {
+                    switch (command[1]){
+                        case "door":
+                            break;
+                        case "chest":
+                            break;
+                        default:
+                            System.out.println("Le deuxième argument doit etre door ou chest selon ce que vous voulez ouvrir");
+                            break;
+                    }
+                } else
+                    System.out.println("la commande take s'utilise avec un deux arguments merci de recommencer");
+
+
+
+
                 hero.getPlace().getChest().open();
                 break;
             case "stop":
