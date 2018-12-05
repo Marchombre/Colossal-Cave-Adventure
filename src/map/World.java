@@ -47,6 +47,10 @@ public class World {
                         String[] splitChest = lineSplit[1].split(",");
                         int place = Integer.parseInt(splitChest[0]);
                         String s = splitChest[1];
+                       /* if(s.equals("KEY")) {
+                            int placeCloseChest = Integer.parseInt(splitChest[2]);
+                            (placesByFloor.get(placeCloseChest / 100).get(placeCloseChest - ((placeCloseChest / 100) * 100))).getChest().
+                        }*/
                         Chest c = new Chest();
                         Item i = buildItem(s);
                         c.addItem(i);
@@ -65,6 +69,34 @@ public class World {
                             gc.addItem(gi);
                         }
                         (placesByFloor.get(gPlace / 100).get(gPlace - ((gPlace / 100) * 100))).addChest(gc);  // AJOUTE CHEST DANS CLASS*/
+                        break;
+
+                    /*case "CloseChest":
+                        String[] splitCChest = lineSplit[1].split(",");
+                        int cPlace = Integer.parseInt(splitCChest[0]);
+                        String cs = splitCChest[1];
+                        Chest cc = new Chest();
+                        Item ci = buildItem(cs);
+                        cc.addItem(ci);
+                        (placesByFloor.get(cPlace / 100).get(cPlace - ((cPlace / 100) * 100))).addChest(cc);  // AJOUTE CHEST DANS CLASS
+                        break;*/
+
+                    case "PartielAlgo":
+                        String[] splitAlgo = lineSplit[1].split(",");
+                        int aPlace = Integer.parseInt(splitAlgo[0]);
+                        (placesByFloor.get(aPlace / 100).get(aPlace - ((aPlace / 100) * 100))).addMonster(new PartielAlgo());
+                        break;
+
+                    case "PartielPOO":
+                        String[] splitPOO = lineSplit[1].split(",");
+                        int pPlace = Integer.parseInt(splitPOO[0]);
+                        (placesByFloor.get(pPlace / 100).get(pPlace - ((pPlace / 100) * 100))).addMonster(new PartielPOO());
+                        break;
+
+                    case "PartielProgC":
+                        String[] splitPC = lineSplit[1].split(",");
+                        int pcPlace = Integer.parseInt(splitPC[0]);
+                        (placesByFloor.get(pcPlace / 100).get(pcPlace - ((pcPlace / 100) * 100))).addMonster(new PartielProgC());
                         break;
                 }
             }
@@ -196,26 +228,35 @@ public class World {
 //                String s = command[1];
 //                hero.equip(s);
 //                break;
-//            case "fight": // TODO: 04/12/2018
-//                System.out.println(hero.getPlace().getMonster().getLife());
-//                hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
-//                System.out.println(hero.getPlace().getMonster().getLife());
-//                break;
+              case "fight": // TODO: 04/12/2018
+                  System.out.println(hero.getPlace().getMonster().getLife());
+                  hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
+                  System.out.println(hero.getPlace().getMonster().getLife());
+                  break;
             case "open": // TODO: 04/12/2018
                 if (command.length == 3) {
                     switch (command[1]) {
                         case "door":
                             break;
                         case "chest":
+                            hero.getPlace().getChest().getItems();
+                            hero.getPlace().getChest().open();
                             break;
                         default:
                             System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
                             break;
                         // TODO: 05/12/2018
                     }
-                } else {
+                }
+                else if(command.length == 2) {
+                    switch (command[1]) {
+                        case "chest":
+                            hero.getPlace().getChest().open();
+                            break;
+                    }
+                }
+                else{
                     System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
-                    hero.getPlace().getChest().open();
                 }
                 break;
             case "stop":

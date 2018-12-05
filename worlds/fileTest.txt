@@ -85,5 +85,6 @@ Exit : 405,406
 Exit : 405,407
 Exit : 407,408
 Exit : 408,500
-Chest : 000,BIGMAC
+Chest : 000,SWORD
 GoldenChest : 001,APPLE,SWORD,BIGMAC
+PartielProgC : 000

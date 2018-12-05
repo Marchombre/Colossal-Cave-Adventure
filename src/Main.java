@@ -36,7 +36,7 @@ public class Main {
         if (world.getHero() == null) {
             System.out.println("Veuillez choisir un nom pour votre personnage");
             String persoName = scanner.nextLine();
-            System.out.println("Bonne chance dans votre aventure " + persoName +"\n\n");
+            System.out.println("Bonne chance dans votre aventure " + persoName +"\n");
             System.out.println(persoName +
                     ", après tant d'année à chercher ce lieux maudit vous l'avez enfin trouvé! Le donjon de la LICENCE 3 INFO.\n" +
                     "Vous le voyez se profiler à travers la roche des montagnes. Il n’est pas très haut, mais dangereux. \n" +
@@ -45,6 +45,7 @@ public class Main {
                     "La mission que vous vous êtes donné il y a bien longtemps est sur le point de se finir!\n" +
                     "Atteindre le haut de ce donjon pour pouvoir vaincre le PUISSANT et TERRIFIANT monstre\n" +
                     "DIPLOME DE LA LICENCE 3 INFO!");
+            System.out.println("------------------------------");
             world.setHero(persoName);
         } else
             System.out.println("Bon retour " + world.getHero().getName());
