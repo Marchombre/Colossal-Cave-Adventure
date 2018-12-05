@@ -83,10 +83,11 @@ public class Place {
 
     public void afficherChest(Chest c) {
         if(c != null) {
-            if (c instanceof GoldenChest) {
-                System.out.println("Il y a 1 coffre d'oré");
-            } else {
-                System.out.println("Il y a 1 Coffre");
+            if (c instanceof Chest) {
+                System.out.println("Il y a 1 coffre");
+            }
+            else if(c instanceof GoldenChest) {
+                System.out.println("Il y a 1 Coffre doré");
             }
         }
     }

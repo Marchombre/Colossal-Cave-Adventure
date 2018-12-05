@@ -8,5 +8,4 @@ public abstract class Item {
 	    return this.name;
     }
 
-    protected abstract void use();
 }

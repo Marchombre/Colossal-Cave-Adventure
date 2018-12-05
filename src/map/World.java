@@ -2,8 +2,7 @@ package map;
 
 import com.sun.tools.jdeps.InverseDepsAnalyzer;
 import game.*;
-import item.Apple;
-import item.Item;
+import item.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -45,13 +44,29 @@ public class World {
                         new Exit(placesByFloor.get(place1 / 100).get(place1 - ((place1 / 100) * 100)), placesByFloor.get(place2 / 100).get(place2 - ((place2 / 100) * 100)));
                         break;
 
-//                    case "Chest":
-//                        String[] splitChest = lineSplit[1].split(",");
-//                        int place = Integer.parseInt(splitChest[0]);
-//                        String s = splitChest[1];
-////                        Item i = new();
-//                        Chest c = new Chest();
-//                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
+                    case "Chest":
+                        String[] splitChest = lineSplit[1].split(",");
+                        int place = Integer.parseInt(splitChest[0]);
+                        String s = splitChest[1];
+                        Chest c = new Chest();
+                        Item i = buildItem(s);
+                        c.addItem(i);
+                        (placesByFloor.get(place / 100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
+                        break;
+
+                    case "GoldenChest":
+                        String[] splitGChest = lineSplit[1].split(",");
+                        int gPlace = Integer.parseInt(splitGChest[0]);
+                        Chest gc = new GoldenChest();
+                        String gs;
+                        Item gi;
+                        for (int k = 1; k < splitGChest.length; k++) {
+                            gs = splitGChest[k];
+                            gi = buildItem(gs);
+                            gc.addItem(gi);
+                        }
+                        (placesByFloor.get(gPlace / 100).get(gPlace - ((gPlace / 100) * 100))).addChest(gc);  // AJOUTE CHEST DANS CLASS*/
+                        break;
                 }
             }
             //creation of all Floors
@@ -80,7 +95,7 @@ public class World {
         String[] command = com.split(" ");
 
 //       // METHODE POUR TAKE
-            Item i2 = new Apple();
+        //Item i2 = new Apple();
 //        Sword s2 = new Sword();
 //        BigMac bg = new BigMac();
 //       Chest c = new Chest();
@@ -88,14 +103,14 @@ public class World {
 //        c2.addItem(i2);
 //        c2.addItem(s2);
 //        c2.addItem(bg);
-  //     hero.getPlace().addChest(c);
+        //     hero.getPlace().addChest(c);
 
 //        // METHODE POUR FIGHT
 //        Monster monster = new Demogorgon();
 //        hero.getPlace().addMonster(monster);
 
 //        //METHODE POUR INVENTAIRE
-            hero.addItem(i2);
+        //hero.addItem(i2);
 //
 //        //METHODE POUR EQUIP
 //        Weapon w2 = (Weapon)new Sword();
@@ -134,7 +149,7 @@ public class World {
                             hero.move(e);
                         else
                             System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.out.println("Le deuxième argument doit être un chiffre");
                     }
                 } else
@@ -151,7 +166,7 @@ public class World {
                     System.out.println("La commande take s'utilise avec un argument merci de recommencer");
                 else if (command.length == 2) {
                     Item itemToAdd = hero.getPlace().getItems(command[1]);
-                    if(itemToAdd != null) {
+                    if (itemToAdd != null) {
                         hero.addItem(itemToAdd);
                         System.out.println("Vous avez ramassé : " + command[1].toUpperCase());
                     } else
@@ -159,18 +174,18 @@ public class World {
                 } else
                     System.out.println("La commande take s'utilise avec un seul argument merci de recommencer");
                 break;
-            case "use" :
+            case "use":
                 // TODO: 04/12/2018
                 if (command.length == 1)
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
                     List<Item> inventory = hero.getInventory();
-                    for(Item item : inventory){
-                        if(item.getName().toLowerCase().equals(command[1])){
-                            
-                        }
-                    }
-                    objet.use(hero)
+//                    for (Item item : inventory) {
+//                        if (item.getName().toLowerCase().equals(command[1])) {
+//
+//                        }
+//                    }
+//                    objet.use(hero)
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
                 } else
@@ -187,7 +202,7 @@ public class World {
 //                break;
             case "open": // TODO: 04/12/2018
                 if (command.length == 3) {
-                    switch (command[1]){
+                    switch (command[1]) {
                         case "door":
                             break;
                         case "chest":
@@ -195,15 +210,12 @@ public class World {
                         default:
                             System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
                             break;
-                            // TODO: 05/12/2018
+                        // TODO: 05/12/2018
                     }
-                } else
+                } else {
                     System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
-
-
-
-
-                hero.getPlace().getChest().open();
+                    hero.getPlace().getChest().open();
+                }
                 break;
             case "stop":
             case "quit":
@@ -213,5 +225,36 @@ public class World {
                 System.out.println("Cette commande n'est pas reconnue. Entrez HELP pour connaitre la liste des commandes");
                 break;
         }
+    }
+
+    public Item buildItem(String s) {
+        Item i = null;
+        switch (s) {
+            case "APPLE":
+                i = new Apple();
+                break;
+            case "BIGMAC":
+                i = new BigMac();
+                break;
+            case "CHESTKEY":
+                i = new ChestKey();
+                break;
+            case "GOLDENAPPLE":
+                i = new GoldenApple();
+                break;
+            case "GUN":
+                i = new Gun();
+                break;
+            case "POTION":
+                i = new Potion();
+                break;
+            case "SWORD":
+                i = new Sword();
+                break;
+            default:
+                System.out.println("Objet inexistant");
+                break;
+        }
+        return i;
     }
 }
