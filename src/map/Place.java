@@ -46,7 +46,7 @@ public class Place {
         StringBuilder res = new StringBuilder();
         for(int i = 0; i < exits.size(); ++i) {
             int val = i+1;
-            res.append("Porte n°").append(val).append(" ");
+            res.append(" - Porte n°").append(val).append(" ");
         }
         System.out.println(res);
     }
@@ -77,23 +77,24 @@ public class Place {
 
     public void afficherMonsters() {
         if(this.monster != null) {
-            System.out.println("Monstre : "+this.monster.getName());
+            System.out.println(" - Monstre : "+this.monster.getName());
         }
     }
 
     public void afficherChest(Chest c) {
         if(c != null) {
             if (c instanceof Chest) {
-                System.out.println("Il y a 1 coffre");
+                System.out.println(" - 1 coffre");
             }
             else if(c instanceof GoldenChest) {
-                System.out.println("Il y a 1 Coffre doré");
+                System.out.println(" - 1 Coffre doré");
             }
         }
     }
 
     public void displayPlace() {
         System.out.println(toString());
+        System.out.println("Dans cette salle vous voyez :");
         displayExits();
         displayItems();
         afficherMonsters();
@@ -118,6 +119,6 @@ public class Place {
         for (Item item : items) {
             res += item.getName() + " ";
         }
-        System.out.println("Item : " + res);
+        System.out.println(" - Item : " + res);
     }
 }

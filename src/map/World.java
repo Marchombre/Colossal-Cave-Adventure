@@ -130,8 +130,9 @@ public class World {
                 //TODO PHRASE A REGARDER
                 break;
             case "look":
-                if (command.length == 1)
+                if (command.length == 1) {
                     hero.getPlace().displayPlace();
+                }
                 else if (command.length == 2) {
                     //todo description de l'objet passé en parametre
                     System.out.println("TODO");
@@ -205,7 +206,6 @@ public class World {
                             break;
                     }
                 } else
-                    System.out.println("La commande take s'utilise avec un ou deux arguments merci de recommencer");
                     hero.getPlace().getChest().open();
                     break;
             case "stop":

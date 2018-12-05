@@ -28,7 +28,7 @@ public class Chest {
 
 	public String afficherItem() {
 		if(this.item != null) {
-			return "Il y a " + this.item.getName();
+			return "- " + this.item.getName();
 		}
 		else {
 			return "Il n'y a rien";
