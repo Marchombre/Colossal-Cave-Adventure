@@ -19,11 +19,25 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
+		inventory.add(new Apple());
 	}
 
 	public String getName(){
 	    return name;
     }
+
+    public int getLife() {
+        return this.life;
+    }
+
+    public Place getPlace(){
+        return currentPlace;
+    }
+
+    public List<Item> getInventory(){
+        return this.inventory;
+    }
+
 
 	public void addItem(Item i) {
 		this.inventory.add(i);
@@ -33,25 +47,20 @@ public class Player extends Character {
 		this.life = this.life - h;
 	}
 
-	public void eat(Item i) {
-	    if(i instanceof Food) {
-            this.life = ((Food) i).getRegen() + this.life;
-        }
-	}
+	public void eat(Food i){
+        this.life += i.getRegen();
+        inventory.remove(i);
 
-	public int getLife() {
-		return this.life;
-	}
-
-	public Place getPlace(){
-		return currentPlace;
 	}
 
 	public void displayInventory() {
-		System.out.print("Inventaire : ");
-		for(Item i : inventory) {
-			System.out.print(i.getName() + " ");
-		}
+	    if(inventory.size() != 0) {
+            StringBuilder res = new StringBuilder("Inventaire : ");
+            for (Item i : inventory) {
+                res.append(i.getName()).append(" ");
+            }
+            System.out.println(res);
+        }
 	}
 
 	public void move(Exit e){
@@ -76,7 +85,4 @@ public class Player extends Character {
 		}
 	}
 
-	public List<Item> getInventory(){
-		return this.inventory;
-	}
 }
