@@ -34,9 +34,9 @@ public class GoldenChest extends Chest{
 	}
 
 	public String afficherItem() {
-		String s="";
+		String s="- ";
 		for(Item i : items) {
-			s = s + i.getName()+" ";
+			s = s + i.getName()+" - ";
 		}
 		return s;
 	}

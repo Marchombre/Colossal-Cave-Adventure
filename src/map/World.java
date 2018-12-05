@@ -130,8 +130,9 @@ public class World {
                 //TODO PHRASE A REGARDER
                 break;
             case "look":
-                if (command.length == 1)
+                if (command.length == 1) {
                     hero.getPlace().displayPlace();
+                }
                 else if (command.length == 2) {
                     //todo description de l'objet passé en parametre
                     System.out.println("TODO");
