@@ -44,13 +44,13 @@ public class World {
                         new Exit(placesByFloor.get(place1 / 100).get(place1 - ((place1 / 100) * 100)), placesByFloor.get(place2 / 100).get(place2 - ((place2 / 100) * 100)));
                         break;
 
-                    case "Chest":
-                        String[] splitChest = lineSplit[1].split(",");
-                        int place = Integer.parseInt(splitChest[0]);
-                        String s = splitChest[1];
-                        Item i = new();
-                        Chest c = new Chest();
-                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
+//                    case "Chest":
+//                        String[] splitChest = lineSplit[1].split(",");
+//                        int place = Integer.parseInt(splitChest[0]);
+//                        String s = splitChest[1];
+////                        Item i = new();
+//                        Chest c = new Chest();
+//                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
                 }
             }
             //creation of all Floors
@@ -102,16 +102,16 @@ public class World {
 
         switch (command[0]) {
             case "help":
-                System.out.println("COMMANDE :\n");
-                System.out.println(" LOOK : Affiche ce qu'il y a autour du personnage\n");
-                System.out.println(" GO : Permet de déplacer le personnage avec le numero de porte mis en parametre\n");
-                System.out.println(" INFO : Permet de voir ce que le joueur a dans son inventaire\n");
-                System.out.println(" TAKE : Affiche ce qu'il y a autour du personnage\n");
-                System.out.println(" EQUIP : Permet d'équiper le hero d'un objet\n");
-                System.out.println(" FIGHT : Permet de combattre\n");
-                System.out.println(" OPEN : Ouvre un coffre\n");
-                System.out.println(" STOP : Stop le jeu\n");
-                System.out.println(" QUIT : Quitter le jeu en cours\n");
+                System.out.println("COMMANDE :");
+                System.out.println(" LOOK : Affiche ce qu'il y a autour du personnage");
+                System.out.println(" GO : Permet de déplacer le personnage avec le numero de porte mis en parametre");
+                System.out.println(" INFO : Permet de voir ce que le joueur a dans son inventaire");
+                System.out.println(" TAKE : Affiche ce qu'il y a autour du personnage");
+                System.out.println(" EQUIP : Permet d'équiper le hero d'un objet");
+                System.out.println(" FIGHT : Permet de combattre");
+                System.out.println(" OPEN : Ouvre un coffre");
+                System.out.println(" STOP : Stop le jeu");
+                System.out.println(" QUIT : Quitter le jeu en cours");
                 //TODO PHRASE A REGARDER
                 break;
             case "look":
@@ -121,11 +121,11 @@ public class World {
                     //todo description de l'objet passé en parametre
                     System.out.println("TODO");
                 } else
-                    System.out.println("la commande look s'utilise avec zéro ou un argument merci de recommencer");
+                    System.out.println("La commande look s'utilise avec zéro ou un argument merci de recommencer");
                 break;
             case "go":
                 if (command.length == 1)
-                    System.out.println("la commande GO s'utilise avec un argument merci de recommencer");
+                    System.out.println("La commande GO s'utilise avec un argument merci de recommencer");
                 else if (command.length == 2) {
                     try {
                         Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
@@ -137,34 +137,37 @@ public class World {
                         System.out.println("Le deuxième argument doit être un chiffre");
                     }
                 } else
-                    System.out.println("la commande GO s'utilise avec un seul argument merci de recommencer");
+                    System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
                 break;
-<<<<<<< HEAD
-                /// TODO: 04/12/2018
             case "info":
-                hero.displayItem();
+                if (command.length == 1)
+                    hero.displayItems();
+                else
+                    System.out.println("La commande info s'utilise sans argument merci de recommencer");
                 break;
-=======
-                // TODO: 04/12/2018
-//            case "info":
-//                hero.displayItem();
-//                break;
->>>>>>> 1f7796195b212467ddca385020c51f755145db0c
             case "take":
                 if (command.length == 1)
-                    System.out.println("la commande take s'utilise avec un argument merci de recommencer");
+                    System.out.println("La commande take s'utilise avec un argument merci de recommencer");
                 else if (command.length == 2) {
                     Item itemToAdd = hero.getPlace().getItems(command[1]);
                     if(itemToAdd != null) {
                         hero.addItem(itemToAdd);
-                        System.out.println("vous avez ramassé : " + command[1]);
+                        System.out.println("Vous avez ramassé : " + command[1].toUpperCase());
                     } else
-                        System.out.println("veuillez orthographier le nom de l'item correctement");
+                        System.out.println("Veuillez orthographier le nom de l'item correctement");
                 } else
-                    System.out.println("la commande take s'utilise avec un seul argument merci de recommencer");
+                    System.out.println("La commande take s'utilise avec un seul argument merci de recommencer");
                 break;
             case "use" :
                 // TODO: 04/12/2018
+                if (command.length == 1)
+                    System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
+                else if (command.length == 2) {
+
+                } else if (command.length == 3) {
+                    //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
+                } else
+                    System.out.println("La commande take s'utilise avec au plus deux arguments merci de recommencer");
                 break;
 //            case "equip": // TODO: 04/12/2018
 //                String s = command[1];
@@ -187,7 +190,7 @@ public class World {
                             break;
                     }
                 } else
-                    System.out.println("la commande take s'utilise avec un deux arguments merci de recommencer");
+                    System.out.println("La commande take s'utilise avec un ou deux arguments merci de recommencer");
 
 
 

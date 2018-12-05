@@ -10,7 +10,7 @@ public class Player extends Character {
 
     private static final int MAX_HEALTH = 100;
     private String name;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
     private Place currentPlace;
     private Weapon weapon;
 
@@ -18,7 +18,6 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
-		items = new ArrayList<>();
 	}
 
 	public String getName(){
@@ -47,7 +46,7 @@ public class Player extends Character {
 		return currentPlace;
 	}
 
-	public void displayItem() {
+	public void displayItems() {
 		System.out.print("Inventaire : ");
 		for(Item i : items) {
 			System.out.print(i.getName() + " ");
