@@ -1,8 +1,7 @@
 package map;
 
 import game.*;
-import item.Apple;
-import item.Item;
+import item.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -44,13 +43,29 @@ public class World {
                         new Exit(placesByFloor.get(place1 / 100).get(place1 - ((place1 / 100) * 100)), placesByFloor.get(place2 / 100).get(place2 - ((place2 / 100) * 100)));
                         break;
 
-//                    case "Chest":
-//                        String[] splitChest = lineSplit[1].split(",");
-//                        int place = Integer.parseInt(splitChest[0]);
-//                        String s = splitChest[1];
-////                        Item i = new();
-//                        Chest c = new Chest();
-//                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
+                    case "Chest":
+                        String[] splitChest = lineSplit[1].split(",");
+                        int place = Integer.parseInt(splitChest[0]);
+                        String s = splitChest[1];
+                        Chest c = new Chest();
+                        Item i = buildItem(s);
+                        c.addItem(i);
+                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
+                        break;
+
+                    case "GoldenChest":
+                        String[] splitGChest = lineSplit[1].split(",");
+                        int gPlace = Integer.parseInt(splitGChest[0]);
+                        Chest gc = new GoldenChest();
+                        String gs;
+                        Item gi;
+                        for(int k=1; k < splitGChest.length ; k++) {
+                            gs = splitGChest[k];
+                            gi =buildItem(gs);
+                            gc.addItem(gi);
+                        }
+                        (placesByFloor.get(gPlace/100).get(gPlace - ((gPlace / 100) * 100))).addChest(gc);  // AJOUTE CHEST DANS CLASS*/
+                        break;
                 }
             }
             //creation of all Floors
@@ -79,7 +94,7 @@ public class World {
         String[] command = com.split(" ");
 
 //       // METHODE POUR TAKE
-            Item i2 = new Apple();
+            //Item i2 = new Apple();
 //        Sword s2 = new Sword();
 //        BigMac bg = new BigMac();
 //       Chest c = new Chest();
@@ -94,7 +109,7 @@ public class World {
 //        hero.getPlace().addMonster(monster);
 
 //        //METHODE POUR INVENTAIRE
-            hero.addItem(i2);
+            //hero.addItem(i2);
 //
 //        //METHODE POUR EQUIP
 //        Weapon w2 = (Weapon)new Sword();
@@ -191,12 +206,8 @@ public class World {
                     }
                 } else
                     System.out.println("La commande take s'utilise avec un ou deux arguments merci de recommencer");
-
-
-
-
-                hero.getPlace().getChest().open();
-                break;
+                    hero.getPlace().getChest().open();
+                    break;
             case "stop":
             case "quit":
                 System.out.println("todo end game");
@@ -205,5 +216,36 @@ public class World {
                 System.out.println("Cette commande n'est pas reconnue. Entrez HELP pour connaitre la liste des commandes");
                 break;
         }
+    }
+
+    public Item buildItem(String s) {
+        Item i = null;
+        switch (s) {
+            case "APPLE":
+                i = new Apple();
+                break;
+            case "BIGMAC":
+                i = new BigMac();
+                break;
+            case "CHESTKEY":
+                i = new ChestKey();
+                break;
+            case "GOLDENAPPLE":
+                i = new GoldenApple();
+                break;
+            case "GUN":
+                i = new Gun();
+                break;
+            case "POTION":
+                i = new Potion();
+                break;
+            case "SWORD":
+                i = new Sword();
+                break;
+            default:
+                System.out.println("Objet inexistant");
+                break;
+        }
+        return i;
     }
 }
