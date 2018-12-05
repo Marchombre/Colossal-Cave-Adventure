@@ -119,7 +119,7 @@ public class Place {
             for (Item item : items) {
                 res.append(item.getName()).append(" ");
             }
-            System.out.println("Item : " + res + " sizeeee : " + items.size());
+            System.out.println("Item : " + res);
         }
     }
 }

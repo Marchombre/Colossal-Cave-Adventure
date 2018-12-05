@@ -179,13 +179,29 @@ public class World {
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
                     List<Item> inventory = hero.getInventory();
-                    for (Item item : inventory) {
+                    String find = "";
+                    int i = 0;
+                    Item itemToUse = null;
+                    while(find.equals("") && i < inventory.size()){
+                        Item item = inventory.get(i);
                         if (item.getName().toLowerCase().equals(command[1])) {
-                            if(item instanceof Food)
-                                hero.eat(item);
+                            if(item instanceof Food) {
+                                itemToUse = item;
+                                find = "food";
+                            }else if(item instanceof Weapon){
+                                itemToUse = item;
+                                find = "weapon";
+                            }else {
+                                // TODO: 05/12/2018
+                            }
                         }
                     }
-//                    objet.use(hero)
+                    if(find.equals("food"))
+                        hero.eat((Food) itemToUse);
+                    else if (find.equals("weapon")){
+                        // TODO: 05/12/2018
+                        hero.equip("TODO");
+                    }
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
                 } else
