@@ -34,9 +34,9 @@ public class Player extends Character {
 	}
 
 	public void eat(Item i) {
-		if(i instanceof Food) {
-			this.life = ((Food) i).getRegen() + this.life;
-		}
+	    if(i instanceof Food) {
+            this.life = ((Food) i).getRegen() + this.life;
+        }
 	}
 
 	public int getLife() {

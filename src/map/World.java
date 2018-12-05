@@ -1,6 +1,5 @@
 package map;
 
-import com.sun.tools.jdeps.InverseDepsAnalyzer;
 import game.*;
 import item.*;
 
@@ -180,11 +179,12 @@ public class World {
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
                     List<Item> inventory = hero.getInventory();
-//                    for (Item item : inventory) {
-//                        if (item.getName().toLowerCase().equals(command[1])) {
-//
-//                        }
-//                    }
+                    for (Item item : inventory) {
+                        if (item.getName().toLowerCase().equals(command[1])) {
+                            if(item instanceof Food)
+                                hero.eat(item);
+                        }
+                    }
 //                    objet.use(hero)
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
