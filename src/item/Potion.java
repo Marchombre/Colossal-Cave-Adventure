@@ -8,6 +8,9 @@ public class Potion extends Food {
 		this.name = "Fiole de vie";
 	}
 
-	
-		
+	public void use(){
+
+	}
+
+
 }

@@ -75,13 +75,13 @@ public class Place {
         return this.monster;
     }
 
-    public void afficherMonsters() {
+    private void afficherMonsters() {
         if(this.monster != null) {
             System.out.println(" - Monstre : "+this.monster.getName());
         }
     }
 
-    public void afficherChest(Chest c) {
+    private void afficherChest(Chest c) {
         if(c != null) {
             if (c instanceof Chest) {
                 System.out.println(" - 1 coffre");
@@ -114,11 +114,13 @@ public class Place {
         items.add(item);
     }
 
-    public void displayItems(){
-        String res = "";
-        for (Item item : items) {
-            res += item.getName() + " ";
+    private void displayItems(){
+        if(items.size() != 0) {
+            StringBuilder res = new StringBuilder();
+            for (Item item : items) {
+                res.append(item.getName()).append(" ");
+            }
+            System.out.println(" - Item : " + res);
         }
-        System.out.println(" - Item : " + res);
     }
 }

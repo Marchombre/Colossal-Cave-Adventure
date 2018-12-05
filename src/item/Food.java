@@ -12,5 +12,7 @@ public abstract class Food extends Item {
 		return this.regen;
 	}
 
-	
+	public void use(){
+
+	}
 }

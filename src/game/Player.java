@@ -5,12 +5,13 @@ import map.Exit;
 import map.Place;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Character {
 
     private static final int MAX_HEALTH = 100;
     private String name;
-    private ArrayList<Item> items = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
     private Place currentPlace;
     private Weapon weapon;
 
@@ -25,7 +26,7 @@ public class Player extends Character {
     }
 
 	public void addItem(Item i) {
-		this.items.add(i);
+		this.inventory.add(i);
 	}
 
 	public void hit(int h) {
@@ -33,9 +34,9 @@ public class Player extends Character {
 	}
 
 	public void eat(Item i) {
-		if(i instanceof Food) {
-			this.life = ((Food) i).getRegen() + this.life;
-		}
+	    if(i instanceof Food) {
+            this.life = ((Food) i).getRegen() + this.life;
+        }
 	}
 
 	public int getLife() {
@@ -46,9 +47,9 @@ public class Player extends Character {
 		return currentPlace;
 	}
 
-	public void displayItems() {
+	public void displayInventory() {
 		System.out.print("Inventaire : ");
-		for(Item i : items) {
+		for(Item i : inventory) {
 			System.out.print(i.getName() + " ");
 		}
 	}
@@ -62,7 +63,7 @@ public class Player extends Character {
 	}
 
 	public void equip(String s) {
-		for(Item k : items) {
+		for(Item k : inventory) {
 			if(k.getName().equals(s) && k instanceof Weapon) {
 				this.weapon = (Weapon)k;
 				System.out.println("Equiper de : "+k.getName());
@@ -73,5 +74,9 @@ public class Player extends Character {
 				break;
 			}
 		}
+	}
+
+	public List<Item> getInventory(){
+		return this.inventory;
 	}
 }

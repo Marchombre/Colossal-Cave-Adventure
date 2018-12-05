@@ -7,5 +7,9 @@ public class GoldenApple extends Food {
 		this.regen = 5;
 		this.name = "Pomme d'or";
 	}
+	public void use(){
+
+	}
+
 
 }

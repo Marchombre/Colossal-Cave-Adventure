@@ -7,4 +7,8 @@ public class Sword extends Weapon {
 		this.hit = 2;
 		this.name = "Epee";
 	}
+	public void use(){
+
+	}
+
 }

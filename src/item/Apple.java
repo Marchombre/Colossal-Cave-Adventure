@@ -7,4 +7,8 @@ public class Apple extends Food {
 		this.regen = 2;
 		this.name = "POMME";
 	}
+
+	public void use(){
+
+	}
 }
