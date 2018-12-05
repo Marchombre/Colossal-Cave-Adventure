@@ -7,7 +7,10 @@ public class Gun extends Weapon{
 		this.hit=5;
 		this.name = "Pistolet";
 	}
-	
-	
-	
+
+	public void use(){
+
+	}
+
+
 }

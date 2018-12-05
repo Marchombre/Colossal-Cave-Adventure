@@ -7,5 +7,9 @@ public class BigMac extends Food {
 		this.regen = 10;
 		this.name = "BigMac";
 	}
-	
+
+	public void use(){
+
+	}
+
 }

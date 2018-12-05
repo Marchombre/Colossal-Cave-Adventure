@@ -1,5 +1,6 @@
 package map;
 
+import com.sun.tools.jdeps.InverseDepsAnalyzer;
 import game.*;
 import item.Apple;
 import item.Item;
@@ -141,7 +142,7 @@ public class World {
                 break;
             case "info":
                 if (command.length == 1)
-                    hero.displayItems();
+                    hero.displayInventory();
                 else
                     System.out.println("La commande info s'utilise sans argument merci de recommencer");
                 break;
@@ -163,7 +164,13 @@ public class World {
                 if (command.length == 1)
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
-
+                    List<Item> inventory = hero.getInventory();
+                    for(Item item : inventory){
+                        if(item.getName().toLowerCase().equals(command[1])){
+                            
+                        }
+                    }
+                    objet.use(hero)
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
                 } else
@@ -186,11 +193,12 @@ public class World {
                         case "chest":
                             break;
                         default:
-                            System.out.println("Le deuxième argument doit etre door ou chest selon ce que vous voulez ouvrir");
+                            System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
                             break;
+                            // TODO: 05/12/2018
                     }
                 } else
-                    System.out.println("La commande take s'utilise avec un ou deux arguments merci de recommencer");
+                    System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
 
 
 
