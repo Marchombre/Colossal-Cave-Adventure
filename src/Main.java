@@ -100,6 +100,7 @@ public class Main {
                 try {
                     System.out.println("Vous avez choisi de commencer une nouvelle partie, merci de choisir un monde parmis la liste suivante");
                     filename = choiceOfWorld("worlds");
+                    System.out.println(filename);
                 } catch (NoDirectoryOfThisNameException | NoTxtFileInDirectoryException e) {
                     e.printStackTrace();
                 }

@@ -1,6 +1,7 @@
 package map;
 
 import game.*;
+import item.Apple;
 import item.Item;
 
 import java.io.*;
@@ -42,6 +43,14 @@ public class World {
                         int place2 = Integer.parseInt(splitExit[1]);
                         new Exit(placesByFloor.get(place1 / 100).get(place1 - ((place1 / 100) * 100)), placesByFloor.get(place2 / 100).get(place2 - ((place2 / 100) * 100)));
                         break;
+
+                    case "Chest":
+                        String[] splitChest = lineSplit[1].split(",");
+                        int place = Integer.parseInt(splitChest[0]);
+                        String s = splitChest[1];
+                        Item i = new();
+                        Chest c = new Chest();
+                        (placesByFloor.get(place/100).get(place - ((place / 100) * 100))).addChest(c);  // AJOUTE CHEST DANS CLASS
                 }
             }
             //creation of all Floors
@@ -69,23 +78,23 @@ public class World {
         com = com.toLowerCase();
         String[] command = com.split(" ");
 
-//        // METHODE POUR TAKE
-//        Item i2 = new Apple();
+//       // METHODE POUR TAKE
+            Item i2 = new Apple();
 //        Sword s2 = new Sword();
 //        BigMac bg = new BigMac();
-//        Chest c = new Chest();
+//       Chest c = new Chest();
 //        GoldenChest c2 = new GoldenChest();
 //        c2.addItem(i2);
 //        c2.addItem(s2);
 //        c2.addItem(bg);
-//        hero.getPlace().addChest(c);
+  //     hero.getPlace().addChest(c);
 
 //        // METHODE POUR FIGHT
 //        Monster monster = new Demogorgon();
 //        hero.getPlace().addMonster(monster);
 
 //        //METHODE POUR INVENTAIRE
-//        hero.addItem(i);
+            hero.addItem(i2);
 //
 //        //METHODE POUR EQUIP
 //        Weapon w2 = (Weapon)new Sword();
@@ -93,8 +102,17 @@ public class World {
 
         switch (command[0]) {
             case "help":
-                System.out.println("todo liste des commandes");
-                // TODO: 04/12/2018
+                System.out.println("COMMANDE :\n");
+                System.out.println(" LOOK : Affiche ce qu'il y a autour du personnage\n");
+                System.out.println(" GO : Permet de déplacer le personnage avec le numero de porte mis en parametre\n");
+                System.out.println(" INFO : Permet de voir ce que le joueur a dans son inventaire\n");
+                System.out.println(" TAKE : Affiche ce qu'il y a autour du personnage\n");
+                System.out.println(" EQUIP : Permet d'équiper le hero d'un objet\n");
+                System.out.println(" FIGHT : Permet de combattre\n");
+                System.out.println(" OPEN : Ouvre un coffre\n");
+                System.out.println(" STOP : Stop le jeu\n");
+                System.out.println(" QUIT : Quitter le jeu en cours\n");
+                //TODO PHRASE A REGARDER
                 break;
             case "look":
                 if (command.length == 1)
@@ -122,9 +140,9 @@ public class World {
                     System.out.println("la commande GO s'utilise avec un seul argument merci de recommencer");
                 break;
                 /// TODO: 04/12/2018
-//            case "info":
-//                hero.displayItem();
-//                break;
+            case "info":
+                hero.displayItem();
+                break;
             case "take":
                 if (command.length == 1)
                     System.out.println("la commande take s'utilise avec un argument merci de recommencer");
