@@ -1,8 +1,6 @@
 import Exceptions.NoDirectoryOfThisNameException;
 import Exceptions.NoTxtFileInDirectoryException;
 
-import item.Apple;
-import item.Item;
 import map.World;
 
 import java.io.File;
