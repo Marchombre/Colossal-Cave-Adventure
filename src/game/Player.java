@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Player extends Character {
 
-    private static final int MAX_HEALTH = 100;
+    private static final int MAX_HEALTH = 20;
     private String name;
     private List<Item> inventory = new ArrayList<>();
     private Place currentPlace;
@@ -19,6 +19,7 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
+		inventory.add(new Sword());
 		inventory.add(new Apple());
 	}
 
@@ -47,6 +48,10 @@ public class Player extends Character {
 		this.life = this.life - h;
 	}
 
+	public int getHit() {
+		return this.weapon.getHit();
+	}
+
 	public void eat(Food i){
         this.life += i.getRegen();
         inventory.remove(i);
@@ -72,14 +77,15 @@ public class Player extends Character {
 	}
 
 	public void equip(String s) {
-		for(Item k : inventory) {
-			if(k.getName().equals(s) && k instanceof Weapon) {
+		String s1 = s.toUpperCase();
+		for(Item k : inventory){
+			if(k.getName().toUpperCase().equals(s1) && k instanceof Weapon) {
 				this.weapon = (Weapon)k;
-				System.out.println("Equiper de : "+k.getName());
+				System.out.println("Vous vous êtes équiper de : "+k.getName());
 				break;
 			}
-			else if(k.getName().equals(s)) {
-				System.out.println("IMPOSSIBLE DE SEQUIPER DE "+k.getName()+" PAS ARMES");
+			else if(k.getName().equals(s1)) {
+				System.out.println("Vous ne pouvez pas vous équiper de "+k.getName());
 				break;
 			}
 		}

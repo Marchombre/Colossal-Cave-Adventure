@@ -1,5 +1,6 @@
 package map;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import game.*;
 import item.*;
 
@@ -188,8 +189,10 @@ public class World {
                     System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
                 break;
             case "info":
-                if (command.length == 1)
+                if (command.length == 1) {
+                    System.out.println("Vie : "+hero.getLife());
                     hero.displayInventory();
+                }
                 else
                     System.out.println("La commande info s'utilise sans argument merci de recommencer");
                 break;
@@ -228,27 +231,44 @@ public class World {
                                 // TODO: 05/12/2018
                             }
                         }
+                        i++;
+                    }
+                    if(itemToUse == null) {
+                        System.out.println("Objet inexistant");
                     }
                     if(find.equals("food"))
                         hero.eat((Food) itemToUse);
                     else if (find.equals("weapon")){
                         // TODO: 05/12/2018
-                        hero.equip("TODO");
+                        hero.equip(command[1]);
                     }
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
                 } else
                     System.out.println("La commande take s'utilise avec au plus deux arguments merci de recommencer");
                 break;
-//            case "equip": // TODO: 04/12/2018
-//                String s = command[1];
-//                hero.equip(s);
-//                break;
-              case "fight": // TODO: 04/12/2018
-                  System.out.println(hero.getPlace().getMonster().getLife());
-                  hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
-                  System.out.println(hero.getPlace().getMonster().getLife());
+
+            case "fight": // TODO: 04/12/2018
+                if(hero.getWeapon() != null) {
+                    if (hero.getPlace().getMonster().getLife() - hero.getHit() >= 0) {
+                        if(hero.getLife() - hero.getPlace().getMonster().getHit() > 0) {
+                            hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
+                            System.out.println(hero.getPlace().getMonster().getName() + " : " + hero.getPlace().getMonster().getLife());
+                            hero.hit(hero.getPlace().getMonster().getHit());
+                            System.out.println(hero.getName() + " : " + hero.getLife());
+                        }
+                        else {
+                            System.out.println(hero.getPlace().getMonster().getName() +" a mit fin à vos jours..\nVous êtes mort! Dommage..");
+                        }
+                    }else {
+                        System.out.println(hero.getPlace().getMonster().getName() + " est vaincu!");
+                    }
+                }
+                else {
+                    System.out.println("Vous ne pouvez pas attaquer si vous n'êtes pas équipé d'une arme");
+                }
                   break;
+
             case "open": // TODO: 04/12/2018
                 if (command.length == 3) {
                     switch (command[1]) {

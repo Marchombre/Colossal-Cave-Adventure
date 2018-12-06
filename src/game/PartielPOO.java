@@ -4,6 +4,6 @@ public class PartielPOO extends Monster{
 
     public PartielPOO() {
         this.name = "Partiel de POO";
-        this.life = 15;
+        this.life = 7;
     }
 }
