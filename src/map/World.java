@@ -173,20 +173,26 @@ public class World {
                     System.out.println("La commande look s'utilise avec zéro ou un argument merci de recommencer");
                 break;
             case "go":
-                if (command.length == 1)
-                    System.out.println("La commande GO s'utilise avec un argument merci de recommencer");
-                else if (command.length == 2) {
-                    try {
-                        Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
-                        if (e != null)
-                            hero.move(e);
-                        else
-                            System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
-                    } catch (NumberFormatException e) {
-                        System.out.println("Le deuxième argument doit être un chiffre");
-                    }
-                } else
-                    System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
+                    if (command.length == 1)
+                        System.out.println("La commande GO s'utilise avec un argument merci de recommencer");
+                    else if (command.length == 2) {
+                        try {
+                            Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
+                            if (e != null)
+                                if(hero.getPlace().getMonster() == null) {
+                                    hero.move(e);
+                                }
+                                else {
+                                    System.out.println(hero.getPlace().getMonster().getName()+" bloque le passage!");
+                                }
+                            else
+                                System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
+                        } catch (NumberFormatException e) {
+                            System.out.println("Le deuxième argument doit être un chiffre");
+                        }
+                    } else{
+                        System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
+                }
                 break;
             case "info":
                 if (command.length == 1) {
@@ -239,8 +245,8 @@ public class World {
                     if(find.equals("food"))
                         hero.eat((Food) itemToUse);
                     else if (find.equals("weapon")){
-                        // TODO: 05/12/2018
                         hero.equip(command[1]);
+                        hero.removeWeapon((Weapon)itemToUse);
                     }
                 } else if (command.length == 3) {
                     //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
@@ -262,6 +268,7 @@ public class World {
                         }
                     }else {
                         System.out.println(hero.getPlace().getMonster().getName() + " est vaincu!");
+                        hero.getPlace().setMonster(hero.getPlace().getMonster());
                     }
                 }
                 else {
@@ -275,7 +282,6 @@ public class World {
                         case "door":
                             break;
                         case "chest":
-                            hero.getPlace().getChest().getItems();
                             hero.getPlace().getChest().open();
                             break;
                         default:
@@ -287,6 +293,7 @@ public class World {
                 else if(command.length == 2) {
                     switch (command[1]) {
                         case "chest":
+                            hero.getPlace().addItem(hero.getPlace().getChest().getItems());
                             hero.getPlace().getChest().open();
                             break;
                     }

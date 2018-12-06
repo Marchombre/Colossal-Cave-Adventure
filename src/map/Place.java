@@ -59,10 +59,6 @@ public class Place {
         this.chest = c;
     }
 
-    public void getChests() {
-        System.out.println("");
-    }
-
     public Chest getChest() {
         return this.chest;
     }
@@ -122,5 +118,9 @@ public class Place {
             }
             System.out.println(" - Item : " + res);
         }
+    }
+
+    public void setMonster(Monster m) {
+        this.monster = null;
     }
 }

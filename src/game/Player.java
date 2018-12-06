@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Player extends Character {
 
-    private static final int MAX_HEALTH = 20;
+    private static final int MAX_HEALTH = 100;
     private String name;
     private List<Item> inventory = new ArrayList<>();
     private Place currentPlace;
@@ -55,7 +55,6 @@ public class Player extends Character {
 	public void eat(Food i){
         this.life += i.getRegen();
         inventory.remove(i);
-
 	}
 
 	public void displayInventory() {
@@ -74,6 +73,10 @@ public class Player extends Character {
 
 	public Weapon getWeapon() {
 		return this.weapon;
+	}
+
+	public void removeWeapon(Weapon i) {
+		inventory.remove(i);
 	}
 
 	public void equip(String s) {
