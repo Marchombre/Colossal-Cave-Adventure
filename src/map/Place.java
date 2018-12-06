@@ -80,9 +80,9 @@ public class Place {
     private void afficherChest(Chest c) {
         if(c != null) {
             if (c instanceof Chest) {
-                System.out.println(" - 1 coffre");
+                System.out.println(" - 1 Coffre");
             }
-            else if(c instanceof GoldenChest) {
+            else {
                 System.out.println(" - 1 Coffre doré");
             }
         }

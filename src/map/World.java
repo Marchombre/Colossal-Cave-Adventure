@@ -1,6 +1,5 @@
 package map;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import game.*;
 import item.*;
 
@@ -48,10 +47,6 @@ public class World {
                         String[] splitChest = lineSplit[1].split(",");
                         int place = Integer.parseInt(splitChest[0]);
                         String s = splitChest[1];
-                       /* if(s.equals("KEY")) {
-                            int placeCloseChest = Integer.parseInt(splitChest[2]);
-                            (placesByFloor.get(placeCloseChest / 100).get(placeCloseChest - ((placeCloseChest / 100) * 100))).getChest().
-                        }*/
                         Chest c = new Chest();
                         Item i = buildItem(s);
                         c.addItem(i);
@@ -126,27 +121,6 @@ public class World {
         com = com.toLowerCase();
         String[] command = com.split(" ");
 
-//       // METHODE POUR TAKE
-        //Item i2 = new Apple();
-//        Sword s2 = new Sword();
-//        BigMac bg = new BigMac();
-//       Chest c = new Chest();
-//        GoldenChest c2 = new GoldenChest();
-//        c2.addItem(i2);
-//        c2.addItem(s2);
-//        c2.addItem(bg);
-        //     hero.getPlace().addChest(c);
-
-//        // METHODE POUR FIGHT
-//        Monster monster = new Demogorgon();
-//        hero.getPlace().addMonster(monster);
-
-//        //METHODE POUR INVENTAIRE
-        //hero.addItem(i2);
-//
-//        //METHODE POUR EQUIP
-//        Weapon w2 = (Weapon)new Sword();
-//        hero.addItem(w2);
 
         switch (command[0]) {
             case "help":
