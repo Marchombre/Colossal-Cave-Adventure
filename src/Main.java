@@ -11,40 +11,79 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static World world;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws InterruptedException {
         String filename;
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-        System.out.println("||  _       _ _ _ _    _    __      _    _ _ _ _ _   _ _ _ _  ||");
-        System.out.println("|| | |     |_ _ _  |  | |  |   \\   | |  |  _ _ _ _| |  _ _  | ||");
-        System.out.println("|| | |      _ _ _| |  | |  | |\\ \\  | |  | |_ _ _    | |   | | ||");
-        System.out.println("|| | |     |_ _ _  |  | |  | | \\ \\ | |  |  _ _ _|   | |   | | ||");
-        System.out.println("|| | |_ _   _ _ _| |  | |  | |  \\ \\| |  | |         | |_ _| | ||");
-        System.out.println("|| |_ _ _| |_ _ _ _|  |_|  |_|   \\ __|  |_|         |_ _ _ _| ||");
-        System.out.println("||                                                            ||  ");
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        String a[]={"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n",
+        "||  _       _ _ _ _    _    __      _    _ _ _ _ _   _ _ _ _  ||\n",
+        "|| | |     |_ _ _  |  | |  |   \\   | |  |  _ _ _ _| |  _ _  | ||\n",
+       "|| | |      _ _ _| |  | |  | |\\ \\  | |  | |_ _ _    | |   | | ||\n",
+      "|| | |     |_ _ _  |  | |  | | \\ \\ | |  |  _ _ _|   | |   | | ||\n",
+        "|| | |_ _   _ _ _| |  | |  | |  \\ \\| |  | |         | |_ _| | ||\n",
+        "|| |_ _ _| |_ _ _ _|  |_|  |_|   \\ __|  |_|         |_ _ _ _| ||\n",
+        "||                                                            ||  \n",
+        "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n"};
 
-
-
-
-        System.out.println("Bienvenue dans le donjon du monstre LICENCE 3 INFO !!");
-        System.out.println("Voulez vous charger une partie sauvegardée ? (y/n)");
+        for (int i = 0;
+                i < a.length;
+                i++) {
+        	for (int j = 0; j < a[i].length(); j++) {
+				
+			}
+               Thread.sleep(60);
+               System.out.print(a[i]);
+           }
+        
+        String bienvenue ="Bienvenue dans le donjon du monstre LICENCE 3 INFO !!\n";
+   String sauvegarde="Voulez vous charger une partie sauvegardée ? (y/n)";
+   for (int i = 0;
+           i < bienvenue.length();
+           i++) {
+          Thread.sleep(20);
+          System.out.print(bienvenue.charAt(i));
+      }
+   for (int i = 0;
+           i < sauvegarde.length();
+           i++) {
+          Thread.sleep(20);
+          System.out.print(sauvegarde.charAt(i));
+      }
+   
+   
         String resp = scanner.nextLine().toLowerCase();
         filename = initiate(resp);
         File file = new File(filename);
         world = new World(file);
 
         if (world.getHero() == null) {
-            System.out.println("Veuillez choisir un nom pour votre personnage");
+            String chooseName="Veuillez choisir un nom pour votre personnage";
+            for (int i = 0;
+                    i < chooseName.length();
+                    i++) {
+                   Thread.sleep(20);
+                   System.out.print(chooseName.charAt(i));
+               }
             String persoName = scanner.nextLine();
-            System.out.println("Bonne chance dans votre aventure " + persoName +"\n");
-            System.out.println(persoName +
+            String bonneChance="Bonne chance dans votre aventure " + persoName +"\n";
+            String intro=persoName +
                     ", après tant d'année à chercher ce lieux maudit vous l'avez enfin trouvé! Le donjon de la LICENCE 3 INFO.\n" +
                     "Vous le voyez se profiler à travers la roche des montagnes. Il n’est pas très haut, mais dangereux. \n" +
-                    "Ses murs semblent épais, ses rares fenêtres étroites et il s’en dégage une impression malsaine!\n");
-            System.out.println(
-                    "La mission que vous vous êtes donné il y a bien longtemps est sur le point de se finir!\n" +
+                    "Ses murs semblent épais, ses rares fenêtres étroites et il s’en dégage une impression malsaine!\n";
+            for (int i = 0;
+                    i < intro.length();
+                    i++) {
+                   Thread.sleep(20);
+                   System.out.print(intro.charAt(i));
+               }
+            
+                  String  mission="La mission que vous vous êtes donné il y a bien longtemps est sur le point de se finir!\n" +
                     "Atteindre le haut de ce donjon pour pouvoir vaincre le PUISSANT et TERRIFIANT monstre\n" +
-                    "DIPLOME DE LA LICENCE 3 INFO!");
+                    "DIPLOME DE LA LICENCE 3 INFO!";
+                    for (int i = 0;
+                            i < mission.length();
+                            i++) {
+                           Thread.sleep(20);
+                           System.out.print(mission.charAt(i));
+                       }
             System.out.println("------------------------------");
             world.setHero(persoName);
         } else
@@ -76,7 +115,18 @@ public class Main {
                 if (listOfFile[i].endsWith(".txt"))
                     System.out.println(i + 1 + " : " + listOfFile[i].substring(0, listOfFile[i].length() - 4));
             }
-            System.out.println("Vous pouvez choisir en entrant le chiffre correspondant au fichier");
+            String worldchoice="Vous pouvez choisir en entrant le chiffre correspondant au fichier";
+            for (int i = 0;
+                    i < worldchoice.length();
+                    i++) {
+                   try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                   System.out.print(worldchoice.charAt(i));
+               }
             try {
                 int numOfFile = Integer.parseInt(scanner.nextLine());
                 filename = "worlds/" + listOfFile[numOfFile - 1];
@@ -118,7 +168,18 @@ public class Main {
             case "no":
             case "non":
                 try {
-                    System.out.println("Vous avez choisi de commencer une nouvelle partie, merci de choisir un monde parmis la liste suivante");
+                    String choice="Vous avez choisi de commencer une nouvelle partie, merci de choisir un monde parmis la liste suivante\n";
+                    for (int i = 0;
+                            i < choice.length();
+                            i++) {
+                           try {
+							Thread.sleep(20);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                           System.out.print(choice.charAt(i));
+                       }
                     filename = choiceOfWorld("worlds");
                 } catch (NoDirectoryOfThisNameException | NoTxtFileInDirectoryException e) {
                     e.printStackTrace();
