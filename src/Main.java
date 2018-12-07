@@ -34,7 +34,7 @@ public class Main {
            }
         
         String bienvenue ="Bienvenue dans le donjon du monstre LICENCE 3 INFO !!\n";
-   String sauvegarde="Voulez vous charger une partie sauvegardée ? (y/n)";
+   String sauvegarde="Voulez vous charger une partie sauvegardée ? (y/n)\n";
    for (int i = 0;
            i < bienvenue.length();
            i++) {
@@ -55,7 +55,7 @@ public class Main {
         world = new World(file);
 
         if (world.getHero() == null) {
-            String chooseName="Veuillez choisir un nom pour votre personnage";
+            String chooseName="Veuillez choisir un nom pour votre personnage\n";
             for (int i = 0;
                     i < chooseName.length();
                     i++) {
@@ -77,7 +77,7 @@ public class Main {
             
                   String  mission="La mission que vous vous êtes donné il y a bien longtemps est sur le point de se finir!\n" +
                     "Atteindre le haut de ce donjon pour pouvoir vaincre le PUISSANT et TERRIFIANT monstre\n" +
-                    "DIPLOME DE LA LICENCE 3 INFO!";
+                    "DIPLOME DE LA LICENCE 3 INFO!\n";
                     for (int i = 0;
                             i < mission.length();
                             i++) {
@@ -115,7 +115,7 @@ public class Main {
                 if (listOfFile[i].endsWith(".txt"))
                     System.out.println(i + 1 + " : " + listOfFile[i].substring(0, listOfFile[i].length() - 4));
             }
-            String worldchoice="Vous pouvez choisir en entrant le chiffre correspondant au fichier";
+            String worldchoice="Vous pouvez choisir en entrant le chiffre correspondant au fichier\n";
             for (int i = 0;
                     i < worldchoice.length();
                     i++) {
