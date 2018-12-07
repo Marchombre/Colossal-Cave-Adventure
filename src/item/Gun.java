@@ -4,8 +4,8 @@ public class Gun extends Weapon{
 
 	public Gun() {
 		super();
-		this.hit=5;
-		this.name = "Pistolet";
+		this.hit=10;
+		this.name = "PISTOLET";
 	}
 
 	public void use(){

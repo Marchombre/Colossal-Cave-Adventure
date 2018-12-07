@@ -5,7 +5,7 @@ public class BigMac extends Food {
 	public BigMac() {
 		super();
 		this.regen = 10;
-		this.name = "BigMac";
+		this.name = "BIGMAC";
 	}
 
 	public void use(){

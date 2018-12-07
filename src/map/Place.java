@@ -123,4 +123,5 @@ public class Place {
     public void setMonster(Monster m) {
         this.monster = null;
     }
+    public void setChest(Chest c) { this.chest = null; }
 }

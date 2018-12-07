@@ -128,12 +128,12 @@ public class World {
                 System.out.println(" LOOK : Affiche ce qu'il y a autour du personnage");
                 System.out.println(" GO : Permet de déplacer le personnage avec le numero de porte mis en parametre");
                 System.out.println(" INFO : Permet de voir ce que le joueur a dans son inventaire");
-                System.out.println(" TAKE : Affiche ce qu'il y a autour du personnage");
-                System.out.println(" EQUIP : Permet d'équiper le hero d'un objet");
+                System.out.println(" TAKE : Prend l'objet passe en parametre");
+                System.out.println(" USE : Permet d'équiper le hero d'une arme ou de manger de la nourriture");
                 System.out.println(" FIGHT : Permet de combattre");
                 System.out.println(" OPEN : Ouvre un coffre");
                 System.out.println(" STOP : Stop le jeu");
-                System.out.println(" QUIT : Quitter le jeu en cours");
+                System.out.println(" QUIT : Quitter le jeu");
                 //TODO PHRASE A REGARDER
                 break;
             case "look":
@@ -246,7 +246,9 @@ public class World {
                     }
                 }
                 else {
-                    System.out.println("Vous ne pouvez pas attaquer si vous n'êtes pas équipé d'une arme");
+                    System.out.println("Vous taper avec les poings ce n'est pas très efficace..");
+                    System.out.println("Vous perdez "+hero.getPlace().getMonster().getHit()+ " point de vie");
+                    hero.hit(hero.getPlace().getMonster().getHit());
                 }
                   break;
 
@@ -269,6 +271,7 @@ public class World {
                         case "chest":
                             hero.getPlace().addItem(hero.getPlace().getChest().getItems());
                             hero.getPlace().getChest().open();
+                            hero.getPlace().setChest(hero.getPlace().getChest());
                             break;
                     }
                 }

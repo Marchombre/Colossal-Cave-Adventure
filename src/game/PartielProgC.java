@@ -5,8 +5,8 @@ public class PartielProgC extends Monster {
 	
 	public PartielProgC() {
 		this.name = "Partiel de Programmation C";
-		this.life = 15;
-		this.hit = 10;
+		this.life = 4;
+		this.hit = 4;
 	}
 	
 }

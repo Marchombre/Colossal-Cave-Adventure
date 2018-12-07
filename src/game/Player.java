@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Player extends Character {
 
-    private static final int MAX_HEALTH = 100;
+    private static final int MAX_HEALTH = 7;
     private String name;
     private List<Item> inventory = new ArrayList<>();
     private Place currentPlace;
@@ -19,8 +19,6 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
-		inventory.add(new Sword());
-		inventory.add(new Apple());
 	}
 
 	public String getName(){
