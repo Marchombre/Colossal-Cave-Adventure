@@ -139,8 +139,7 @@ public class World {
             case "look":
                 if (command.length == 1) {
                     hero.getPlace().displayPlace();
-                }
-                else if (command.length == 2) {
+                } else if (command.length == 2) {
                     //todo description de l'objet passé en parametre
                     System.out.println("TODO");
                 } else
@@ -212,11 +211,9 @@ public class World {
                             }
                         }
                         i++;
-                    }
-                    if(itemToUse == null) {
+                    }if(itemToUse == null) {
                         System.out.println("Objet inexistant");
-                    }
-                    if(find.equals("food"))
+                    }if(find.equals("food"))
                         hero.eat((Food) itemToUse);
                     else if (find.equals("weapon")){
                         hero.equip(command[1]);
@@ -227,33 +224,49 @@ public class World {
                 } else
                     System.out.println("La commande take s'utilise avec au plus deux arguments merci de recommencer");
                 break;
-
             case "fight": // TODO: 04/12/2018
-                if(hero.getWeapon() != null) {
-                    if (hero.getPlace().getMonster().getLife() - hero.getHit() >= 0) {
-                        if(hero.getLife() - hero.getPlace().getMonster().getHit() > 0) {
-                            hero.getPlace().getMonster().hit(hero.getWeapon().getHit());
-                            System.out.println(hero.getPlace().getMonster().getName() + " : " + hero.getPlace().getMonster().getLife());
-                            hero.hit(hero.getPlace().getMonster().getHit());
-                            System.out.println(hero.getName() + " : " + hero.getLife());
+                if (command.length == 1) {
+                    Monster monster = hero.getPlace().getMonster();
+                    if(monster != null) {
+                        if (hero.getWeapon() != null) {
+                            if (monster.getLife() - hero.getWeaponDamages() > 0) {
+                                if (hero.getLife() - monster.getDamages() > 0) {
+                                    monster.beHit(hero.getWeapon().getDamages());
+                                    System.out.println(monster.getName() + " : " + monster.getLife());
+                                    hero.beHit(monster.getDamages());
+                                    System.out.println(hero.getName() + " : " + hero.getLife());
+                                } else {
+                                    System.out.println(monster.getName() + " a mit fin à vos jours...\nVous êtes mort! Dommage...");
+                                    hero.die();
+                                }
+                            } else {
+                                System.out.println(monster.getName() + " est vaincu!");
+                                monster.die();
+                                hero.getPlace().deadMonster();
+                            }
+                        } else { //todo
+                            System.out.println("Vous taper avec les poings ce n'est pas très efficace...");
+                            System.out.println("Vous perdez " + monster.getDamages() + " point de vie");
+                            hero.beHit(monster.getDamages());
+                            if (hero.getLife() <= 0)
+                                hero.die();
                         }
-                        else {
-                            System.out.println(hero.getPlace().getMonster().getName() +" a mit fin à vos jours..\nVous êtes mort! Dommage..");
-                        }
-                    }else {
-                        System.out.println(hero.getPlace().getMonster().getName() + " est vaincu!");
-                        hero.getPlace().setMonster(hero.getPlace().getMonster());
-                    }
-                }
-                else {
-                    System.out.println("Vous taper avec les poings ce n'est pas très efficace..");
-                    System.out.println("Vous perdez "+hero.getPlace().getMonster().getHit()+ " point de vie");
-                    hero.hit(hero.getPlace().getMonster().getHit());
-                }
-                  break;
+                    }else
+                        System.out.println("Il n'y a pas d'ennemis dans cette salle.");
+                } else
+                    System.out.println("La commande fight s'utilise sans argument merci de recommencer");
+                break;
 
             case "open": // TODO: 04/12/2018
-                if (command.length == 3) {
+                if(command.length == 2) {
+                    switch (command[1]) {
+                        case "chest":
+                            hero.getPlace().addItem(hero.getPlace().getChest().getItems());
+                            hero.getPlace().getChest().open();
+                            hero.getPlace().openChest();
+                            break;
+                    }
+                }else if (command.length == 3) {
                     switch (command[1]) {
                         case "door":
                             break;
@@ -265,19 +278,8 @@ public class World {
                             break;
                         // TODO: 05/12/2018
                     }
-                }
-                else if(command.length == 2) {
-                    switch (command[1]) {
-                        case "chest":
-                            hero.getPlace().addItem(hero.getPlace().getChest().getItems());
-                            hero.getPlace().getChest().open();
-                            hero.getPlace().setChest(hero.getPlace().getChest());
-                            break;
-                    }
-                }
-                else{
+                } else
                     System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
-                }
                 break;
             case "stop":
             case "quit":

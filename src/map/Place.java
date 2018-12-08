@@ -120,8 +120,12 @@ public class Place {
         }
     }
 
-    public void setMonster(Monster m) {
+    public void deadMonster() {
         this.monster = null;
     }
-    public void setChest(Chest c) { this.chest = null; }
+
+
+    public void openChest() {
+        this.chest = null;
+    }
 }

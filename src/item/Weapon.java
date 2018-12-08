@@ -2,14 +2,14 @@ package item;
 
 public abstract class Weapon extends Item {
 
-	int hit;
+	int damages;
 
 	public Weapon() {
 		super();
 	}
 
-	public int getHit() {
-		return this.hit;
+	public int getDamages() {
+		return this.damages;
 	}
 
 	public void use(){

@@ -16,8 +16,8 @@ public class Main {
         String a[]={"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n",
         "||  _       _ _ _ _    _    __      _    _ _ _ _ _   _ _ _ _  ||\n",
         "|| | |     |_ _ _  |  | |  |   \\   | |  |  _ _ _ _| |  _ _  | ||\n",
-       "|| | |      _ _ _| |  | |  | |\\ \\  | |  | |_ _ _    | |   | | ||\n",
-      "|| | |     |_ _ _  |  | |  | | \\ \\ | |  |  _ _ _|   | |   | | ||\n",
+        "|| | |      _ _ _| |  | |  | |\\ \\  | |  | |_ _ _    | |   | | ||\n",
+        "|| | |     |_ _ _  |  | |  | | \\ \\ | |  |  _ _ _|   | |   | | ||\n",
         "|| | |_ _   _ _ _| |  | |  | |  \\ \\| |  | |         | |_ _| | ||\n",
         "|| |_ _ _| |_ _ _ _|  |_|  |_|   \\ __|  |_|         |_ _ _ _| ||\n",
         "||                                                            ||  \n",
@@ -89,11 +89,13 @@ public class Main {
         } else
             System.out.println("Bon retour " + world.getHero().getName());
 
-        while (true) {//TODO changer la condition d'arret du while
+        while (world.getHero().isAlive()) {//TODO changer la condition d'arret du while
             String command = scanner.nextLine();
             world.action(command);
             System.out.println("------------------------------");
         }
+        if(!world.getHero().isAlive())
+            System.out.println("Echec, vous etes mort");
     }
 
     private static String[] listOfFiles(File rep) throws NoDirectoryOfThisNameException, NoTxtFileInDirectoryException {

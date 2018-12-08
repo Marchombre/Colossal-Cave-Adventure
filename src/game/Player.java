@@ -19,6 +19,8 @@ public class Player extends Character {
 		this.name = heroName;
 		this.life = MAX_HEALTH;
 		this.currentPlace = place;
+		this.weapon = null;
+		this.alive = true;
 	}
 
 	public String getName(){
@@ -42,12 +44,12 @@ public class Player extends Character {
 		this.inventory.add(i);
 	}
 
-	public void hit(int h) {
+	public void beHit(int h) {
 		this.life = this.life - h;
 	}
 
-	public int getHit() {
-		return this.weapon.getHit();
+	public int getWeaponDamages() {
+		return this.weapon.getDamages();
 	}
 
 	public void eat(Food i){
