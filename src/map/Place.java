@@ -22,6 +22,7 @@ public class Place {
         this.name = name;
         this.exits = new ArrayList<>();
         this.items = new ArrayList<>();
+        this.chest = null;
     }
 
     @Override
@@ -40,6 +41,10 @@ public class Place {
                 tmp = exits.get(i);
         }
         return tmp;
+    }
+
+    public List<Exit> getAllExits(){
+        return this.exits;
     }
 
     public void displayExits(){
@@ -123,7 +128,6 @@ public class Place {
     public void deadMonster() {
         this.monster = null;
     }
-
 
     public void openChest() {
         this.chest = null;

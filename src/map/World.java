@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
 
 public class World {
 
@@ -146,33 +147,31 @@ public class World {
                     System.out.println("La commande look s'utilise avec zéro ou un argument merci de recommencer");
                 break;
             case "go":
-                    if (command.length == 1)
-                        System.out.println("La commande GO s'utilise avec un argument merci de recommencer");
-                    else if (command.length == 2) {
-                        try {
-                            Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
-                            if (e != null)
-                                if(hero.getPlace().getMonster() == null) {
-                                    hero.move(e);
-                                }
-                                else {
-                                    System.out.println(hero.getPlace().getMonster().getName()+" bloque le passage!");
-                                }
-                            else
-                                System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
-                        } catch (NumberFormatException e) {
-                            System.out.println("Le deuxième argument doit être un chiffre");
-                        }
-                    } else{
-                        System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
+                if (command.length == 1)
+                    System.out.println("La commande GO s'utilise avec un argument merci de recommencer");
+                else if (command.length == 2) {
+                    try {
+                        Exit e = hero.getPlace().getExit(Integer.parseInt(command[1]));
+                        if (e != null)
+                            if (hero.getPlace().getMonster() == null) {
+                                hero.move(e);
+                            } else {
+                                System.out.println(hero.getPlace().getMonster().getName() + " bloque le passage!");
+                            }
+                        else
+                            System.out.println("Le chiffre que vous avez entré ne correspond a aucune porte");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Le deuxième argument doit être un chiffre");
+                    }
+                } else {
+                    System.out.println("La commande GO s'utilise avec un seul argument merci de recommencer");
                 }
                 break;
             case "info":
                 if (command.length == 1) {
-                    System.out.println("Vie : "+hero.getLife());
+                    System.out.println("Vie : " + hero.getLife());
                     hero.displayInventory();
-                }
-                else
+                } else
                     System.out.println("La commande info s'utilise sans argument merci de recommencer");
                 break;
             case "take":
@@ -194,40 +193,32 @@ public class World {
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
                     List<Item> inventory = hero.getInventory();
-                    String find = "";
+                    boolean find = false;
                     int i = 0;
-                    Item itemToUse = null;
-                    while(find.equals("") && i < inventory.size()){
+                    while (!find && i < inventory.size()) {
                         Item item = inventory.get(i);
                         if (item.getName().toLowerCase().equals(command[1])) {
-                            if(item instanceof Food) {
-                                itemToUse = item;
-                                find = "food";
-                            }else if(item instanceof Weapon){
-                                itemToUse = item;
-                                find = "weapon";
-                            }else {
-                                // TODO: 05/12/2018
-                            }
+                            if (item instanceof Food) {
+                                hero.eat((Food) item);
+                                find = true;
+                            } else if (item instanceof Weapon) {
+                                hero.equip(command[1]);
+                                hero.removeWeapon((Weapon) item);
+                                find = true;
+                            } else
+                                System.out.println("Vous ne pouvez pas utiliser cet objet");
                         }
-                        i++;
-                    }if(itemToUse == null) {
-                        System.out.println("Objet inexistant");
-                    }if(find.equals("food"))
-                        hero.eat((Food) itemToUse);
-                    else if (find.equals("weapon")){
-                        hero.equip(command[1]);
-                        hero.removeWeapon((Weapon)itemToUse);
+                        ++i;
                     }
-                } else if (command.length == 3) {
-                    //on regarde si on a cet objet dans l'inventaire et si oui on utilise sa méthode use perso
+                    if (!find)
+                        System.out.println("Objet inexistant");
                 } else
-                    System.out.println("La commande take s'utilise avec au plus deux arguments merci de recommencer");
+                    System.out.println("La commande take s'utilise avec un argument merci de recommencer");
                 break;
-            case "fight": // TODO: 04/12/2018
+            case "fight":
                 if (command.length == 1) {
                     Monster monster = hero.getPlace().getMonster();
-                    if(monster != null) {
+                    if (monster != null) {
                         if (hero.getWeapon() != null) {
                             if (monster.getLife() - hero.getWeaponDamages() > 0) {
                                 if (hero.getLife() - monster.getDamages() > 0) {
@@ -244,45 +235,63 @@ public class World {
                                 monster.die();
                                 hero.getPlace().deadMonster();
                             }
-                        } else { //todo
+                        } else {
                             System.out.println("Vous taper avec les poings ce n'est pas très efficace...");
                             System.out.println("Vous perdez " + monster.getDamages() + " point de vie");
                             hero.beHit(monster.getDamages());
                             if (hero.getLife() <= 0)
                                 hero.die();
                         }
-                    }else
+                    } else
                         System.out.println("Il n'y a pas d'ennemis dans cette salle.");
                 } else
                     System.out.println("La commande fight s'utilise sans argument merci de recommencer");
                 break;
 
-            case "open": // TODO: 04/12/2018
-                if(command.length == 2) {
-                    switch (command[1]) {
-                        case "chest":
-                            hero.getPlace().addItem(hero.getPlace().getChest().getItems());
-                            hero.getPlace().getChest().open();
-                            hero.getPlace().openChest();
-                            break;
+            case "open":
+                if (command.length == 2) {
+                    if (command[1].equals("chest")) {
+                        if (hero.getPlace().getChest() != null) {
+                            if (!(hero.getPlace().getChest() instanceof CloseChest)) {
+                                hero.getPlace().getChest().open();
+                                hero.getPlace().addItem(hero.getPlace().getChest().getItems());
+                                hero.getPlace().openChest();
+                            } else
+                                System.out.println("ce coffre semble fermé, essaye de recommencer avec une clé ...");
+                        } else
+                            System.out.println("Il n'y a pas de coffre dans cette salle.");
                     }
-                }else if (command.length == 3) {
+                } else if (command.length == 3) {
                     switch (command[1]) {
                         case "door":
+                            // TODO: 08/12/2018
+                            List<Exit> doors = hero.getPlace().getAllExits();
+                            boolean find = false;
+                            int i = 0;
+                            while(!find){
+                                if(doors.get(i) instanceof LockedExit && ((LockedExit) doors.get(i)).isLocked())
+                                    if(((LockedExit) doors.get(i)).isTheGoodKey())
+                                ++i;
+                            }
                             break;
                         case "chest":
-                            hero.getPlace().getChest().open();
+                            if (hero.getPlace().getChest() instanceof CloseChest){
+                                // TODO: 08/12/2018
+                                //je regarde dans l'inventaire si j'ai la bonne clé
+                                //si oui j'ouvre si non message erreur
+                                hero.getPlace().getChest().open();
+                            }else
+                                System.out.println("Ce coffre n'est pas fermé à clé, vous pouvez l'ouvrir normalement");
                             break;
                         default:
                             System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
                             break;
-                        // TODO: 05/12/2018
                     }
                 } else
                     System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
                 break;
             case "stop":
-            case "quit":
+            case "quit":// TODO: 08/12/2018  
                 System.out.println("todo end game");
                 break;
             default:

@@ -18,11 +18,11 @@ public class LockedExit extends Exit {
             this.locked = false;
     }
 
-/*    @Override
-    public void cross(){
-        if(locked == false){
-            //todo
-        }
-    }*/
+    public boolean isTheGoodKey(DoorKey k){
+        return k == this.key;
+    }
 
+    public boolean isLocked(){
+        return locked;
+    }
 }
