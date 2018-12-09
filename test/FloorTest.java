@@ -1,13 +1,12 @@
-import static org.junit.Assert.*;
-
-import java.util.List;
-import java.util.ArrayList;
-
 import map.Floor;
 import map.Place;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
 
 public class FloorTest {
 	private Floor floor;
@@ -16,9 +15,7 @@ public class FloorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
 		floor=new Floor(0, places);
-		
 	}
 
 	@Test
