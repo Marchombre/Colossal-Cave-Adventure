@@ -140,11 +140,8 @@ public class World {
             case "look":
                 if (command.length == 1) {
                     hero.getPlace().displayPlace();
-                } else if (command.length == 2) {
-                    //todo description de l'objet passé en parametre
-                    System.out.println("TODO");
                 } else
-                    System.out.println("La commande look s'utilise avec zéro ou un argument merci de recommencer");
+                    System.out.println("La commande look s'utilise sans argument merci de recommencer");
                 break;
             case "go":
                 if (command.length == 1)
@@ -213,7 +210,7 @@ public class World {
                     if (!find)
                         System.out.println("Objet inexistant");
                 } else
-                    System.out.println("La commande take s'utilise avec un argument merci de recommencer");
+                    System.out.println("La commande use s'utilise avec un argument merci de recommencer");
                 break;
             case "fight":
                 if (command.length == 1) {
@@ -264,24 +261,10 @@ public class World {
                 } else if (command.length == 3) {
                     switch (command[1]) {
                         case "door":
-                            // TODO: 08/12/2018
-                            List<Exit> doors = hero.getPlace().getAllExits();
-                            boolean find = false;
-                            int i = 0;
-                            while(!find){
-                                if(doors.get(i) instanceof LockedExit && ((LockedExit) doors.get(i)).isLocked())
-                                    if(((LockedExit) doors.get(i)).isTheGoodKey())
-                                ++i;
-                            }
+                            System.out.println("Il n'y a pas de porte fermée ici");
                             break;
                         case "chest":
-                            if (hero.getPlace().getChest() instanceof CloseChest){
-                                // TODO: 08/12/2018
-                                //je regarde dans l'inventaire si j'ai la bonne clé
-                                //si oui j'ouvre si non message erreur
-                                hero.getPlace().getChest().open();
-                            }else
-                                System.out.println("Ce coffre n'est pas fermé à clé, vous pouvez l'ouvrir normalement");
+                            System.out.println("Il n'y a pas de coffre fermé dans cette salle");
                             break;
                         default:
                             System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
