@@ -7,24 +7,24 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.locks.Lock;
 
 public class World {
 
     private List<Floor> floors = new ArrayList<>();
-    private int nbFloors;
     private Player hero = null;
+    private boolean endOfGame;
 
     public World(File file) {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
+        endOfGame = false;
 
         try (Scanner scannerFile = new Scanner(new BufferedReader(new FileReader(file)))) {
             while (scannerFile.hasNextLine()) {
                 String[] lineSplit = scannerFile.nextLine().split(" : ");
                 switch (lineSplit[0]) {
                     case "NBFLOORS":
-                        this.nbFloors = Integer.parseInt(lineSplit[1]);
+                        int nbFloors = Integer.parseInt(lineSplit[1]);
                         for (int i = 0; i < nbFloors; ++i) {
                             List<Place> p = new ArrayList<>();
                             placesByFloor.add(p);
@@ -185,7 +185,6 @@ public class World {
                     System.out.println("La commande take s'utilise avec un seul argument merci de recommencer");
                 break;
             case "use":
-                // TODO: 04/12/2018
                 if (command.length == 1)
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
@@ -283,7 +282,7 @@ public class World {
         }
     }
 
-    public Item buildItem(String s) {
+    private Item buildItem(String s) {
         Item i = null;
         switch (s) {
             case "APPLE":
