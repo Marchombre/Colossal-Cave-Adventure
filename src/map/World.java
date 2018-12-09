@@ -95,6 +95,12 @@ public class World {
                         int pcPlace = Integer.parseInt(splitPC[0]);
                         (placesByFloor.get(pcPlace / 100).get(pcPlace - ((pcPlace / 100) * 100))).addMonster(new PartielProgC());
                         break;
+
+                    case "DiplomeL3Info":
+                        String[] splitDC = lineSplit[1].split(",");
+                        int dcPlace = Integer.parseInt(splitDC[0]);
+                        (placesByFloor.get(dcPlace / 100).get(dcPlace - ((dcPlace / 100) * 100))).addMonster(new DiplomeL3Info());
+                        break;
                 }
             }
             //creation of all Floors
@@ -259,6 +265,7 @@ public class World {
                     }
                 } else if (command.length == 3) {
                     switch (command[1]) {
+<<<<<<< HEAD
 
                       /* case "door":
                             // TODO: 08/12/2018
@@ -276,6 +283,11 @@ public class World {
                             System.out.println("Il n'y a pas de porte fermée ici");
                             break;
 
+=======
+                        case "door":
+                            System.out.println("Il n'y a pas de porte fermée ici");
+                            break;
+>>>>>>> 3f9af11e6747af58cb9a92555d26bdc58a676a4f
                         case "chest":
                             System.out.println("Il n'y a pas de coffre fermé dans cette salle");
                             break;
