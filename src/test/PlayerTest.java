@@ -1,17 +1,11 @@
-import static org.junit.Assert.*;
-
-import item.Apple;
-import item.Food;
-import item.Item;
-import item.Sword;
-import item.Weapon;
 import game.Player;
-
+import item.*;
 import map.Exit;
 import map.Place;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class PlayerTest {
 	private Player player;
