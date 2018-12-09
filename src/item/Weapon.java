@@ -12,8 +12,6 @@ public abstract class Weapon extends Item {
 		return this.damages;
 	}
 
-	public void use(){
-
-	}
+	public void use(){}
 
 }
