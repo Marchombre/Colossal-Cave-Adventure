@@ -1,10 +1,10 @@
-import static org.junit.Assert.*;
+import game.Chest;
 import item.Apple;
 import item.Item;
-import game.Chest;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class ChestTest {
 	private Chest chest;
