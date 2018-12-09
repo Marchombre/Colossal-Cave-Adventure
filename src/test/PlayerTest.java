@@ -1,9 +1,4 @@
-package test;
-
 import static org.junit.Assert.*;
-
-import java.awt.List;
-import java.util.ArrayList;
 
 import item.Apple;
 import item.Food;
@@ -18,11 +13,9 @@ import map.Place;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.org.apache.xml.internal.utils.ListingErrorHandler;
-
 public class PlayerTest {
-	Player player;
-	Place place;
+	private Player player;
+	private Place place;
 	
 	
 	@Before
@@ -36,18 +29,13 @@ public class PlayerTest {
 		int oldlife=player.getLife();
 		player.beHit(10);
 		assertNotSame(oldlife, player.getName());
-		
 	}
-
-
-	
 
 	@Test
 	public void testAddItem() {
 		Item i=new Sword();
 		player.addItem(i);
 		assertNotNull(player.getInventory());
-		
 	}
 
 	@Test
@@ -57,11 +45,6 @@ public class PlayerTest {
 		player.beHit(2);
 		player.eat(pomme);
 		assertSame(life, player.getLife());
-		
-		
-		
-		
-		
 	}
 
 	@Test
@@ -70,7 +53,6 @@ public class PlayerTest {
 		Exit exit=new Exit(place, place2);
 		player.move(exit);
 		assertSame(player.getPlace(), place2);
-		
 	}
 
 	@Test
@@ -80,7 +62,6 @@ public class PlayerTest {
 		String str=s.getName();
 		player.equip(str);
 		assertNotNull(player.getWeapon());
-		
 	}
 
 }

@@ -1,8 +1,6 @@
-package test;
-
 import static org.junit.Assert.*;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 
 import map.Floor;
@@ -11,11 +9,9 @@ import map.Place;
 import org.junit.Before;
 import org.junit.Test;
 
-import sun.net.www.content.text.plain;
-
 public class FloorTest {
-	Floor floor;
-	java.util.List<Place> places=new ArrayList<>();
+	private Floor floor;
+	private List<Place> places=new ArrayList<>();
 	
 
 	@Before
