@@ -7,24 +7,24 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.locks.Lock;
 
 public class World {
 
     private List<Floor> floors = new ArrayList<>();
-    private int nbFloors;
     private Player hero = null;
+    private boolean endOfGame;
 
     public World(File file) {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
+        endOfGame = false;
 
         try (Scanner scannerFile = new Scanner(new BufferedReader(new FileReader(file)))) {
             while (scannerFile.hasNextLine()) {
                 String[] lineSplit = scannerFile.nextLine().split(" : ");
                 switch (lineSplit[0]) {
                     case "NBFLOORS":
-                        this.nbFloors = Integer.parseInt(lineSplit[1]);
+                        int nbFloors = Integer.parseInt(lineSplit[1]);
                         for (int i = 0; i < nbFloors; ++i) {
                             List<Place> p = new ArrayList<>();
                             placesByFloor.add(p);
@@ -140,11 +140,8 @@ public class World {
             case "look":
                 if (command.length == 1) {
                     hero.getPlace().displayPlace();
-                } else if (command.length == 2) {
-                    //todo description de l'objet passé en parametre
-                    System.out.println("TODO");
                 } else
-                    System.out.println("La commande look s'utilise avec zéro ou un argument merci de recommencer");
+                    System.out.println("La commande look s'utilise sans argument merci de recommencer");
                 break;
             case "go":
                 if (command.length == 1)
@@ -188,7 +185,6 @@ public class World {
                     System.out.println("La commande take s'utilise avec un seul argument merci de recommencer");
                 break;
             case "use":
-                // TODO: 04/12/2018
                 if (command.length == 1)
                     System.out.println("La commande use s'utilise avec au moins un argument merci de recommencer");
                 else if (command.length == 2) {
@@ -213,7 +209,7 @@ public class World {
                     if (!find)
                         System.out.println("Objet inexistant");
                 } else
-                    System.out.println("La commande take s'utilise avec un argument merci de recommencer");
+                    System.out.println("La commande use s'utilise avec un argument merci de recommencer");
                 break;
             case "fight":
                 if (command.length == 1) {
@@ -263,6 +259,7 @@ public class World {
                     }
                 } else if (command.length == 3) {
                     switch (command[1]) {
+<<<<<<< HEAD
                       /* case "door":
                             // TODO: 08/12/2018
                             List<Exit> doors = hero.getPlace().getAllExits();
@@ -274,14 +271,13 @@ public class World {
                                 ++i;
                             }
                             break;*/
+=======
+                        case "door":
+                            System.out.println("Il n'y a pas de porte fermée ici");
+                            break;
+>>>>>>> 4ddd4d4fd916a0bcc2a7f930b6caaac7cf78be47
                         case "chest":
-                            if (hero.getPlace().getChest() instanceof CloseChest){
-                                // TODO: 08/12/2018
-                                //je regarde dans l'inventaire si j'ai la bonne clé
-                                //si oui j'ouvre si non message erreur
-                                hero.getPlace().getChest().open();
-                            }else
-                                System.out.println("Ce coffre n'est pas fermé à clé, vous pouvez l'ouvrir normalement");
+                            System.out.println("Il n'y a pas de coffre fermé dans cette salle");
                             break;
                         default:
                             System.out.println("Le premier argument doit etre door ou chest selon ce que vous voulez ouvrir");
@@ -300,7 +296,7 @@ public class World {
         }
     }
 
-    public Item buildItem(String s) {
+    private Item buildItem(String s) {
         Item i = null;
         switch (s) {
             case "APPLE":
