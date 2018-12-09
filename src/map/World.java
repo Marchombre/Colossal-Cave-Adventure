@@ -263,7 +263,7 @@ public class World {
                     }
                 } else if (command.length == 3) {
                     switch (command[1]) {
-                        case "door":
+                      /* case "door":
                             // TODO: 08/12/2018
                             List<Exit> doors = hero.getPlace().getAllExits();
                             boolean find = false;
@@ -273,7 +273,7 @@ public class World {
                                     if(((LockedExit) doors.get(i)).isTheGoodKey())
                                 ++i;
                             }
-                            break;
+                            break;*/
                         case "chest":
                             if (hero.getPlace().getChest() instanceof CloseChest){
                                 // TODO: 08/12/2018
