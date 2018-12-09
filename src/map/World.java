@@ -259,7 +259,7 @@ public class World {
                     }
                 } else if (command.length == 3) {
                     switch (command[1]) {
-<<<<<<< HEAD
+
                       /* case "door":
                             // TODO: 08/12/2018
                             List<Exit> doors = hero.getPlace().getAllExits();
@@ -271,11 +271,11 @@ public class World {
                                 ++i;
                             }
                             break;*/
-=======
+
                         case "door":
                             System.out.println("Il n'y a pas de porte fermée ici");
                             break;
->>>>>>> 4ddd4d4fd916a0bcc2a7f930b6caaac7cf78be47
+
                         case "chest":
                             System.out.println("Il n'y a pas de coffre fermé dans cette salle");
                             break;
