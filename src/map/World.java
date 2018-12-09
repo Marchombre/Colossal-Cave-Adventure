@@ -95,6 +95,12 @@ public class World {
                         int pcPlace = Integer.parseInt(splitPC[0]);
                         (placesByFloor.get(pcPlace / 100).get(pcPlace - ((pcPlace / 100) * 100))).addMonster(new PartielProgC());
                         break;
+
+                    case "DiplomeL3Info":
+                        String[] splitDC = lineSplit[1].split(",");
+                        int dcPlace = Integer.parseInt(splitDC[0]);
+                        (placesByFloor.get(dcPlace / 100).get(dcPlace - ((dcPlace / 100) * 100))).addMonster(new DiplomeL3Info());
+                        break;
                 }
             }
             //creation of all Floors

@@ -39,4 +39,5 @@ Chest : 300,POTION
 PartielPOO : 002
 PartielProgC : 103
 PartielAlgo : 206
+DiplomeL3Info : 301
 
