@@ -1,6 +1,7 @@
 import Exceptions.NoDirectoryOfThisNameException;
 import Exceptions.NoTxtFileInDirectoryException;
 
+import game.DiplomeL3Info;
 import map.World;
 
 import java.io.File;
@@ -89,13 +90,16 @@ public class Main {
         } else
             System.out.println("Bon retour " + world.getHero().getName());
 
-        while (world.getHero().isAlive()) {//TODO changer la condition d'arret du while
+        while (world.getHero().isAlive() ) {//TODO changer la condition d'arret du while
             String command = scanner.nextLine();
             world.action(command);
             System.out.println("------------------------------");
         }
         if(!world.getHero().isAlive())
             System.out.println("Echec, vous etes mort");
+        if(world.getHero().getPlace().getMonster() instanceof DiplomeL3Info && world.getHero().getPlace().getMonster().isAlive()) {
+            System.out.println("GAGNE!");
+        }
     }
 
     private static String[] listOfFiles(File rep) throws NoDirectoryOfThisNameException, NoTxtFileInDirectoryException {
