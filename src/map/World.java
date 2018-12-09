@@ -13,11 +13,13 @@ public class World {
     private List<Floor> floors = new ArrayList<>();
     private Player hero = null;
     private boolean endOfGame;
+    private boolean quit;
 
     public World(File file) {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
         endOfGame = false;
+        quit = false;
 
         try (Scanner scannerFile = new Scanner(new BufferedReader(new FileReader(file)))) {
             while (scannerFile.hasNextLine()) {
@@ -141,7 +143,6 @@ public class World {
                 System.out.println(" OPEN : Ouvre un coffre");
                 System.out.println(" STOP : Stop le jeu");
                 System.out.println(" QUIT : Quitter le jeu");
-                //TODO PHRASE A REGARDER
                 break;
             case "look":
                 if (command.length == 1) {
@@ -236,6 +237,7 @@ public class World {
                                 if(monster instanceof DiplomeL3Info) {
                                     System.out.println("FELICITATION "+hero.getName().toUpperCase()+"!");
                                     System.out.println("VOUS AVEZ REUSSI A VAINCRE LE TERRIFIANT DIPLOME DE LA LICENCE INFO 3");
+                                    endOfGame = true;
                                 }
                                 else {
                                     System.out.println(monster.getName() + " est vaincu!");
@@ -285,8 +287,9 @@ public class World {
                     System.out.println("La commande open s'utilise avec un ou deux arguments merci de recommencer");
                 break;
             case "stop":
-            case "quit":// TODO: 08/12/2018  
-                System.out.println("todo end game");
+            case "quit":
+                System.out.println("Merci d'avoir joué !! A la prochaine !");
+                quit = true;
                 break;
             default:
                 System.out.println("Cette commande n'est pas reconnue. Entrez HELP pour connaitre la liste des commandes");
@@ -323,5 +326,13 @@ public class World {
                 break;
         }
         return i;
+    }
+
+    public boolean getEndOfGame(){
+        return endOfGame;
+    }
+
+    public boolean getQuit(){
+        return quit;
     }
 }
