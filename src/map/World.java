@@ -233,9 +233,15 @@ public class World {
                                     hero.die();
                                 }
                             } else {
-                                System.out.println(monster.getName() + " est vaincu!");
-                                monster.die();
-                                hero.getPlace().deadMonster();
+                                if(monster instanceof DiplomeL3Info) {
+                                    System.out.println("FELICITATION "+hero.getName().toUpperCase()+"!");
+                                    System.out.println("VOUS AVEZ REUSSI A VAINCRE LE TERRIFIANT DIPLOME DE LA LICENCE INFO 3");
+                                }
+                                else {
+                                    System.out.println(monster.getName() + " est vaincu!");
+                                    monster.die();
+                                    hero.getPlace().deadMonster();
+                                }
                             }
                         } else {
                             System.out.println("Vous taper avec les poings ce n'est pas très efficace...");
