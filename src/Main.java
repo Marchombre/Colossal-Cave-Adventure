@@ -1,7 +1,5 @@
 import Exceptions.NoDirectoryOfThisNameException;
 import Exceptions.NoTxtFileInDirectoryException;
-
-import game.DiplomeL3Info;
 import map.World;
 
 import java.io.File;
@@ -90,16 +88,15 @@ public class Main {
         } else
             System.out.println("Bon retour " + world.getHero().getName());
 
-        while (world.getHero().isAlive() ) {//TODO changer la condition d'arret du while
+        while (world.getHero().isAlive() && !world.getEndOfGame() && !world.getQuit()) {
             String command = scanner.nextLine();
             world.action(command);
             System.out.println("------------------------------");
         }
         if(!world.getHero().isAlive())
             System.out.println("Echec, vous etes mort");
-        if(world.getHero().getPlace().getMonster() instanceof DiplomeL3Info && world.getHero().getPlace().getMonster().isAlive()) {
-            System.out.println("GAGNE!");
-        }
+        else if (world.getEndOfGame())
+            System.out.println("A la prochaine ;)");
     }
 
     private static String[] listOfFiles(File rep) throws NoDirectoryOfThisNameException, NoTxtFileInDirectoryException {
@@ -128,7 +125,6 @@ public class Main {
                    try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
                    System.out.print(worldchoice.charAt(i));
@@ -161,9 +157,10 @@ public class Main {
             case "oui":
                 try {
                     System.out.println("Vous avez choisi de jouer sur une partie sauvegardée");
-                    filename = choiceOfWorld("backups"); //TODO check l'extention des fichiers (pas forcement txt)
+                    filename = choiceOfWorld("backups");
                 } catch (NoDirectoryOfThisNameException e) {
-                    e.printStackTrace();
+                    System.out.println("Il n'y a pas de partie sauvegardée");
+                    initiate("n");
                 } catch (NoTxtFileInDirectoryException e) {
                     System.out.println("Il n'y a pas de partie sauvegardée");
                     initiate("n");
