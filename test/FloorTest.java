@@ -1,4 +1,4 @@
-<<<<<<< HEAD:src/test/FloorTest.java
+
 package test;
 
 import static org.junit.Assert.*;
