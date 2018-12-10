@@ -58,11 +58,16 @@ public class GoldenChest extends Chest{
 			this.items.add(item);
 		}
 	}
-
+/**
+ * Returns all the items that are in the golden chest.
+ * @return the items in the GoldenChest as an ArrayList of Items
+ */
 	public ArrayList<Item> getItem() {
 		return this.items;
 	}
-
+/**
+ * Displays all the names of items in the golden chest
+ */
 	public String afficherItem() {
 		String s="- ";
 		for(Item i : items) {

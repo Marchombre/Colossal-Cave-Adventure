@@ -7,14 +7,38 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * <b> World is the class that represents the map where the game takes place.<b>
+ * <p>
+ * A World is characterized by:
+ * <ul>
+ * <li>floors that are in the map</li>	
+ * <li> A hero</li>
+ * <li>An attribute endOfGame that tells if the game is over</li>
+ * </ul>A boolean quit</li>
+ * </p></li>
+ * @version 1.0
+ */
 public class World {
-
+/**
+ * List of floors in the world.
+ */
     private List<Floor> floors = new ArrayList<>();
+    /**
+     * The hero of the game.
+     */
     private Player hero = null;
+    /**
+     * Represents the end of the game
+     */
+    
     private boolean endOfGame;
     private boolean quit;
-
+/**
+ * The constructor of the world
+ * @param file
+ * The file which contains the map of the game.
+ */
     public World(File file) {
 
         List<List<Place>> placesByFloor = new ArrayList<>();
@@ -113,19 +137,35 @@ public class World {
             e.printStackTrace();
         }
     }
-
+/**
+ * Returns the current player.
+ * @return the current player.
+ */
     public Player getHero() {
         return this.hero;
     }
-
+/**
+ * Sets the current player
+ * @param name
+ * The new name of the player
+ */
     public void setHero(String name) {
         this.hero = new Player(name, getPlaceById(0));
     }
-
+/**
+ * Returns a place by its ID.
+ * @param id
+ * ID of the place.
+ * @return place by its ID as a Place object.
+ */
     private Place getPlaceById(int id) {
         return floors.get(id / 100).getPlace(id - ((id / 100) * 100));
     }
-
+/**
+ * Executes the command passed in parameter.
+ * @param com
+ * The command to execute.
+ */
     public void action(String com) {
         com = com.toLowerCase();
         String[] command = com.split(" ");
@@ -312,7 +352,6 @@ public class World {
                 break;
         }
     }
-
     private Item buildItem(String s) {
         Item i = null;
         switch (s) {
@@ -343,11 +382,13 @@ public class World {
         }
         return i;
     }
-
+/**
+ * Tells if the game is over.
+ * @return a boolean that tells if the game is over.
+ */
     public boolean getEndOfGame(){
         return endOfGame;
     }
-
     public boolean getQuit(){
         return quit;
     }
