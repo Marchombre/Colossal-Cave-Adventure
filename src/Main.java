@@ -125,7 +125,6 @@ public class Main {
                    try {
 					Thread.sleep(20);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
                    System.out.print(worldchoice.charAt(i));
@@ -158,9 +157,10 @@ public class Main {
             case "oui":
                 try {
                     System.out.println("Vous avez choisi de jouer sur une partie sauvegardée");
-                    filename = choiceOfWorld("backups"); //TODO check l'extention des fichiers (pas forcement txt)
+                    filename = choiceOfWorld("backups");
                 } catch (NoDirectoryOfThisNameException e) {
-                    e.printStackTrace();
+                    System.out.println("Il n'y a pas de partie sauvegardée");
+                    initiate("n");
                 } catch (NoTxtFileInDirectoryException e) {
                     System.out.println("Il n'y a pas de partie sauvegardée");
                     initiate("n");

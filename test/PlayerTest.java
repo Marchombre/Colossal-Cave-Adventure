@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+package test;
+
+import static org.junit.Assert.*;
+
+import item.Apple;
+import item.Food;
+import item.Item;
+import item.Sword;
+import item.Weapon;
+=======
+>>>>>>> 7ce3f68f8b7700e1ed042e44be6050726a655dc3
 import game.Player;
 import item.*;
 import map.Exit;

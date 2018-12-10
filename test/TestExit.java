@@ -1,3 +1,5 @@
+package test;
+
 import static org.junit.Assert.*;
 import game.Player;
 
@@ -25,5 +27,4 @@ public class TestExit {
 		player.move(exit);
 		assertSame(player.getPlace(), place2);
 	}
-
 }

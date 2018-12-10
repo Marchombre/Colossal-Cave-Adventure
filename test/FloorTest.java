@@ -1,3 +1,13 @@
+
+package test;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+import java.util.ArrayList;
+
+=======
+>>>>>>> 3f9af11e6747af58cb9a92555d26bdc58a676a4f:test/FloorTest.java
 import map.Floor;
 import map.Place;
 import org.junit.Before;

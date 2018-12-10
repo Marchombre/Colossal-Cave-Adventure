@@ -7,16 +7,43 @@ import item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *<b>Place is a class that represents the diffrent places in our game.</b>
+ * @version 1.0
+ *
+ */
 public class Place {
-
+/**
+ * The name of the place.
+ */
     private String name;
+    /**
+     * The ID of the place.
+     */
     private int id;
+    /**
+     * The list of exits in a place
+     */
     private List<Exit> exits;
+    /**
+     * The chest in a place.
+     */
     private Chest chest;
+    /**
+     * The monster in a place.
+     */
     private Monster monster;
+    /**
+     * The list of items in a place.
+     */
     private List<Item> items;
-
+/**
+ * The constructor of Place
+ * @param id
+ * The id of the place
+ * @param name
+ * The name of the place
+ */
     public Place(int id, String name){
         this.id = id;
         this.name = name;
@@ -42,11 +69,16 @@ public class Place {
         }
         return tmp;
     }
-
+/**
+ * Returns the list of exits in a place.
+ * @return the list of exits in a place as a list of Exit objects.
+ */
     public List<Exit> getAllExits(){
         return this.exits;
     }
-
+/**
+ * Displays all the exits names.
+ */
     public void displayExits(){
         StringBuilder res = new StringBuilder();
         for(int i = 0; i < exits.size(); ++i) {
@@ -55,23 +87,40 @@ public class Place {
         }
         System.out.println(res);
     }
-
+/**
+ * Returns the floor of the current place.
+ * @return The floor of the current place as an integer.
+ */
     public int getFloor(){
         return (this.id/100);
     }
-
+/**
+ * Adds a Chest in the current place.
+ * @param c
+ * the chest to add.
+ */
     public void addChest(Chest c) {
         this.chest = c;
     }
-
+/**
+ * Returns the chest that is in the current place.
+ * @return returns the chest that is in the current place as a Chest object.
+ */
     public Chest getChest() {
         return this.chest;
     }
-
+/**
+ * Adds a monster into the current place.
+ * @param m
+ * The monster to add.
+ */
     public void addMonster(Monster m) {
         this.monster = m;
     }
-
+/**
+ * Returns The Monster in the current Place.
+ * @returnThe monster in the current Place.
+ */
     public Monster getMonster() {
         return this.monster;
     }
@@ -124,11 +173,15 @@ public class Place {
             System.out.println(" - Item : " + res);
         }
     }
-
+/**
+ * Kills the monster in a place.
+ */
     public void deadMonster() {
         this.monster = null;
     }
-
+/**
+ * Opens the chest in the current place.
+ */
     public void openChest() {
         this.chest = null;
     }

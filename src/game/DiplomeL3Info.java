@@ -1,5 +1,7 @@
 package game;
-
+/*
+ * 
+ */
 public class DiplomeL3Info extends Monster {
 
     public DiplomeL3Info() {

@@ -1,4 +1,10 @@
+<<<<<<< HEAD:src/test/ChestTest.java
+package test;
+
+import static org.junit.Assert.*;
+=======
 import game.Chest;
+>>>>>>> 3f9af11e6747af58cb9a92555d26bdc58a676a4f:test/ChestTest.java
 import item.Apple;
 import item.Item;
 import org.junit.Before;

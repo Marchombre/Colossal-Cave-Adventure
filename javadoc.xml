@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="false" classpath="C:\Users\azazga media\Desktop\eclipse EE\plugins\org.junit_4.10.0.v4_10_0_v20120426-0900\junit.jar;C:\Users\azazga media\Desktop\eclipse EE\plugins\org.hamcrest.core_1.1.0.v20090501071000.jar;out/artifacts/Colossal_Cave_Adventure_jar/Colossal-Cave-Adventure.jar" destdir="doc" doctitle="javadoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="Exceptions,item,map,game" source="1.7" sourcefiles="src/Main.java" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
